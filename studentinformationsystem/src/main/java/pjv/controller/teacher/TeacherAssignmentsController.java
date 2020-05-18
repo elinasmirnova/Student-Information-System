@@ -1,0 +1,235 @@
+package pjv.controller.teacher;
+
+import com.jfoenix.controls.JFXTextArea;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Controller;
+import pjv.config.StageManager;
+import pjv.controller.LoginController;
+import pjv.model.Assignment;
+import pjv.model.Exam;
+import pjv.model.Subject;
+import pjv.model.Teacher;
+import pjv.service.AssignmentService;
+import pjv.service.SubjectService;
+import pjv.service.TeacherService;
+import pjv.view.FxmlView;
+
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.ResourceBundle;
+
+@Controller
+public class TeacherAssignmentsController implements Initializable {
+
+    @FXML
+    private MenuItem homeMenuItem;
+
+    @FXML
+    private MenuItem subjectsMenuItem;
+
+    @FXML
+    private MenuItem examsMenuItem;
+
+    @FXML
+    private Label label;
+
+    @FXML
+    private Label assignmentId;
+
+    @FXML
+    private ComboBox<String> subjectCode;
+
+    @FXML
+    private TextField title;
+
+    @FXML
+    private DatePicker deadline;
+
+    @FXML
+    private JFXTextArea txtAreaDescription;
+
+    @FXML
+    private Button reset;
+
+    @FXML
+    private Button save;
+
+    @FXML
+    private Button btnLogout;
+
+    @FXML
+    private TableView<Assignment> assignmentsTable;
+
+    @FXML
+    private TableColumn<Assignment, Integer> colId;
+
+    @FXML
+    private TableColumn<Assignment, String> colSubject;
+
+    @FXML
+    private TableColumn<Assignment, String> colTitle;
+
+    @FXML
+    private TableColumn<Assignment, LocalDate> colDeadline;
+
+    @FXML
+    private TableColumn<Assignment, String> colDescription;
+
+    Teacher teacher;
+
+    @Lazy
+    @Autowired
+    private StageManager stageManager;
+
+    @Autowired
+    private AssignmentService assignmentService;
+
+    @Autowired
+    private TeacherService teacherService;
+
+    @Autowired
+    private SubjectService subjectService;
+
+
+    private ObservableList<Assignment> assignmentsList = FXCollections.observableArrayList();
+    private ObservableList<String> subjectCodes = FXCollections.observableArrayList();
+
+
+    @FXML
+    void delete(ActionEvent event) {
+        Assignment assignment = assignmentsTable.getSelectionModel().getSelectedItem();
+        assignmentService.remove(assignment);
+        reset();
+        updateTable();
+    }
+
+    @FXML
+    void save(ActionEvent event) {
+        if (assignmentId.getText().equals("") || assignmentId.getText() == null) {
+            Assignment assignment = new Assignment();
+
+            assignment.setName(title.getText());
+            assignment.setDeadline(deadline.getValue());
+            assignment.setDescription(txtAreaDescription.getText());
+            assignment.setSubject(subjectService.findSubjectByCode(subjectCode.getValue()));
+            assignment.setTeacher(teacher);
+
+            assignmentService.persist(assignment);
+
+            updateTable();
+
+
+        } else {
+            Assignment existingAssignment = assignmentService.find(Integer.parseInt(assignmentId.getText()));
+
+            existingAssignment.setName(title.getText());
+            existingAssignment.setDeadline(deadline.getValue());
+            existingAssignment.setDescription(txtAreaDescription.getText());
+            existingAssignment.setSubject(subjectService.findSubjectByCode(subjectCode.getValue()));
+
+            assignmentService.update(existingAssignment);
+
+            updateTable();
+
+        }
+    }
+
+
+    @FXML
+    void toExams(ActionEvent event) {
+        stageManager.switchScene(FxmlView.TEACHER_EXAMS);
+    }
+
+    @FXML
+    void toHome(ActionEvent event) {
+        stageManager.switchScene(FxmlView.TEACHER_MAIN);
+    }
+
+    @FXML
+    void toSubjects(ActionEvent event) {
+        stageManager.switchScene(FxmlView.TEACHER_SUBJECTS);
+    }
+
+    private void reset() {
+        label.setText("Add new exam");
+        save.setText("Save");
+        assignmentId.setText(null);
+        subjectCode.getSelectionModel().clearSelection();
+        deadline.getEditor().clear();
+        title.clear();
+        txtAreaDescription.clear();
+    }
+
+    private void setColumnProperties(){
+        colId.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
+        colSubject.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSubject().getCode()));
+        colTitle.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        colDeadline.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getDeadline()));
+        colDescription.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+
+    }
+
+    public void updateTable() {
+        loadAssignmentsDetails();
+    }
+
+    private void loadSubjectCodesToCheckBox() {
+        List<Subject> subjects = teacher.getSubjects();
+        for (Subject subject : subjects) {
+            subjectCodes.add(subject.getCode());
+        }
+
+        subjectCode.setItems(subjectCodes);
+
+    }
+
+    public void loadAssignmentsDetails() {
+        assignmentsList.clear();
+        assignmentsList.addAll(assignmentService.findAssignmentsByTeacherId(teacher.getId()));
+        assignmentsTable.setItems(assignmentsList);
+    }
+
+    private void fillTextFields() {
+        reset();
+        label.setText("Edit exam info");
+        save.setText("Edit");
+        Assignment assignment = assignmentsTable.getSelectionModel().getSelectedItem();
+        assignmentId.setText(assignment.getId().toString());
+        subjectCode.setValue(assignment.getSubject().getCode());
+        deadline.setValue(assignment.getDeadline());
+        title.setText(assignment.getName());
+        txtAreaDescription.setText(assignment.getDescription());
+
+    }
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        teacher = teacherService.findByUsername(LoginController.authorizationLogin);
+        setColumnProperties();
+        loadAssignmentsDetails();
+        loadSubjectCodesToCheckBox();
+
+        assignmentsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                fillTextFields();
+//                assignmentsTable.getSelectionModel().clearSelection();
+            }
+        });
+
+        reset.setOnAction(event -> reset());
+        btnLogout.setOnAction(event -> stageManager.switchScene(FxmlView.LOGIN));
+    }
+}

@@ -12,7 +12,7 @@ import pjv.view.FxmlView;
 @SpringBootApplication
 public class Main extends Application {
 
-    private ConfigurableApplicationContext context;
+    public static ConfigurableApplicationContext context;
     private StageManager stageManager;
 
     public static void main(String[] args) {
