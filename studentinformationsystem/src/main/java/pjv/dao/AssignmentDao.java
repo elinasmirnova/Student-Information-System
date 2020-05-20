@@ -16,4 +16,12 @@ public class AssignmentDao extends BaseDao<Assignment>  {
         return em.createQuery(
                 "SELECT a FROM Assignment AS a WHERE a.teacher.id = :id", Assignment.class).setParameter("id", id).getResultList();
     }
+
+
+    public List<Assignment> findAllBySubjectCode(String code) {
+        return em.createQuery(
+                "select a from Assignment a where a.subject.code = :code", Assignment.class)
+                .setParameter("code", code).getResultList();
+
+    }
 }

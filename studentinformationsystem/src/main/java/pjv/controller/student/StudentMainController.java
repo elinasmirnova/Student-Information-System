@@ -37,15 +37,15 @@ public class StudentMainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        subjectsButton.setOnAction(event -> stageManager.switchScene(FxmlView.ADMIN_SUBJECTS));
+        subjectsButton.setOnAction(event -> stageManager.switchScene(FxmlView.STUDENT_SUBJECTS));
 
-        examsButton.setOnAction(event -> stageManager.switchScene(FxmlView.ADMIN_STUDENTS));
+        examsButton.setOnAction(event -> stageManager.switchScene(FxmlView.STUDENT_EXAMS));
 
-        assignmentsButton.setOnAction(event -> stageManager.switchScene(FxmlView.ADMIN_TEACHERS));
+        assignmentsButton.setOnAction(event -> stageManager.switchScene(FxmlView.STUDENT_ASSIGNMENTS));
 
-        studyResultsButton.setOnAction(event -> stageManager.switchScene(FxmlView.ADMIN_TEACHERS));
+        studyResultsButton.setOnAction(event -> stageManager.switchScene(FxmlView.STUDENT_STUDY_RESULTS));
 
-        personalInfoButton.setOnAction(event -> stageManager.switchScene(FxmlView.ADMIN_TEACHERS));
+        personalInfoButton.setOnAction(event -> stageManager.switchScene(FxmlView.STUDENT_PERSONAL_INFO));
 
     }
 }

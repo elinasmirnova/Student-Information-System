@@ -48,4 +48,9 @@ public class ExamService {
     public List<Exam> findExamsByTeacherId(Integer id) {
         return examDao.findExamsByTeacherId(id);
     }
+
+    @Transactional
+    public List<Exam> findAvailableToEnrollExamsBySubject(String code) {
+        return examDao.findAvailableToEnrollExamsBySubject(code);
+    }
 }

@@ -28,4 +28,31 @@ public class EnrolledStudentDao extends BaseDao<EnrolledStudent> {
         Query query = em.createQuery("Select s from EnrolledStudent as s where s.student.id = :id", EnrolledStudent.class).setParameter("id", id);
         return query.getResultList();
     }
+
+    public List<Integer> findSubjectsIDByStudentId(Integer id) {
+        Query q = em.createNativeQuery("SELECT subject_id FROM enrolledStudents WHERE student_id = ?1").setParameter(1, id);
+        return q.getResultList();
+    }
+
+    public List<Integer> findCompletedSubjectsIDByStudentId(Integer id) {
+        Query q = em.createNativeQuery("SELECT subject_id FROM enrolledStudents " +
+                "WHERE student_id = ?1 and grade is not null and completed = true")
+                .setParameter(1, id);
+        return q.getResultList();
+    }
+
+    public Object findGradeByStudentIdAndSubjectId(Integer studentId, Integer subjectId) {
+        Query q = em.createNativeQuery("SELECT grade FROM enrolledStudents" +
+                " WHERE student_id = ?1 AND subject_id = ?2")
+                .setParameter(1, studentId).setParameter(2, subjectId);
+        return q.getSingleResult();
+    }
+
+    public List<Integer> findEnrolledSubjectsByStudentId(Integer id) {
+        Query q = em.createNativeQuery("SELECT subject_id FROM enrolledStudents " +
+                "WHERE student_id = ?1 and grade is null and completed = false")
+                .setParameter(1, id);
+        return q.getResultList();
+    }
+
 }

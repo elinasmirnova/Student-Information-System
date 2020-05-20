@@ -50,4 +50,9 @@ public class AssignmentService {
         return dao.findAssignmentsByTeacherId(id);
     }
 
+    @Transactional
+    public List<Assignment> findAllBySubjectCode(String code) {
+        return dao.findAllBySubjectCode(code);
+    }
+
 }

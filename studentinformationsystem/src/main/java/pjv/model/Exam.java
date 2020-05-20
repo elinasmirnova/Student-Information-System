@@ -1,5 +1,7 @@
 package pjv.model;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -7,6 +9,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "exam")
@@ -34,6 +39,29 @@ public class Exam implements Serializable {
     @ManyToOne
     @JoinColumn(name = "teacher", referencedColumnName = "id")
     private Teacher teacher;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "student_exam",
+            joinColumns = @JoinColumn(name = "exam_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id"))
+    @Fetch(value = FetchMode.SUBSELECT)
+    List<Student> students;
+
+    public void addStudent(Student s) {
+        Objects.requireNonNull(teacher);
+        if (this.students == null) {
+            this.students = new ArrayList<>();
+        }
+        students.add(s);
+        s.addExam(this);
+    }
+
+    public void removeStudent(Student s) {
+        Objects.requireNonNull(s);
+        students.removeIf(current -> current.getId().equals(subject.getId()));
+        s.removeExam(this);
+    }
 
     public Integer getId() {
         return id;

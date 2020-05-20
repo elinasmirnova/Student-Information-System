@@ -54,5 +54,25 @@ public class EnrolledStudentService {
         return dao.findByStudentId(id);
     }
 
+    @Transactional
+    public List<Integer> findSubjectsIDByStudentId(Integer id) {
+        return dao.findSubjectsIDByStudentId(id);
+    }
+
+    @Transactional
+    public List<Integer> findCompletedSubjectsIDByStudentId(Integer id) {
+        return dao.findCompletedSubjectsIDByStudentId(id);
+    }
+
+    @Transactional
+    public Object findGradeByStudentIdAndSubjectId(Integer studentId, Integer subjectId) {
+        return dao.findGradeByStudentIdAndSubjectId(studentId, subjectId);
+    }
+
+    @Transactional
+    public List<Integer> findEnrolledSubjectsByStudentId(Integer id) {
+        return dao.findEnrolledSubjectsByStudentId(id);
+    }
+
 
 }

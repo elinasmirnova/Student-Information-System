@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-//@NamedQueries({
-//        @NamedQuery(name = "Student.findByUsername", query = "SELECT u FROM Student u WHERE u.user.username = :username")
-//})
+@NamedQueries({
+        @NamedQuery(name = "Student.findByUsername", query = "SELECT s FROM Student s WHERE s.user.username = :username")
+})
 @Entity
 @Table(name = "student")
 public class Student implements Serializable{
@@ -46,6 +46,9 @@ public class Student implements Serializable{
 //    @org.hibernate.annotations.Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     public List<EnrolledStudent> enrolledStudents;
 
+    @ManyToMany(mappedBy = "students", fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    List<Exam> exams;
 
     public List<EnrolledStudent> getEnrolledStudents() {
         return enrolledStudents;
@@ -66,6 +69,27 @@ public class Student implements Serializable{
     public void removeEnrolledStudent(EnrolledStudent e) {
         Objects.requireNonNull(e);
         enrolledStudents.removeIf(current -> current.getId().equals(e.getId()));
+    }
+
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
+    }
+
+    public void addExam(Exam e) {
+        Objects.requireNonNull(e);
+        if (this.exams == null) {
+            this.exams = new ArrayList<>();
+        }
+        exams.add(e);
+    }
+
+    public void removeExam(Exam e) {
+        Objects.requireNonNull(e);
+        exams.removeIf(current -> current.getId().equals(e.getId()));
     }
 
     public Integer getId() {

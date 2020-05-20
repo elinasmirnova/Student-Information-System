@@ -1,5 +1,7 @@
 package pjv.controller.admin;
 
+import com.jfoenix.controls.*;
+import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -25,47 +27,33 @@ import java.util.ResourceBundle;
 
 @Controller
 public class AdminStudentsController implements Initializable {
-    @FXML
-    private MenuItem homeMenuItem;
-
-    @FXML
-    private MenuItem subjectsMenuItem;
-
-    @FXML
-    private MenuItem teachersMenuItem;
 
     @FXML
     private Label userId;
 
     @FXML
-    private TextField username;
+    private JFXTextField username;
 
     @FXML
-    private TextField firstName;
+    private JFXTextField firstName;
 
     @FXML
-    private TextField lastName;
+    private JFXTextField lastName;
 
     @FXML
-    private DatePicker dob;
+    private JFXDatePicker dob;
 
     @FXML
-    private ComboBox<Integer> year;
+    private JFXComboBox<Integer> year;
 
     @FXML
-    private ComboBox<String> studyProgram;
+    private JFXComboBox<String> studyProgram;
 
     @FXML
-    private PasswordField password;
+    private JFXPasswordField password;
 
     @FXML
-    private Button reset;
-
-    @FXML
-    private Button saveUser;
-
-    @FXML
-    private Button btnLogout;
+    private JFXButton reset;
 
     @FXML
     private TableView<Student> userTable;
@@ -90,9 +78,6 @@ public class AdminStudentsController implements Initializable {
 
     @FXML
     private TableColumn<Student, String> colStudyProgram;
-
-    @FXML
-    private MenuItem deleteUsers;
 
     @Lazy
     @Autowired
@@ -132,7 +117,7 @@ public class AdminStudentsController implements Initializable {
 
     @FXML
     void toSubjects(ActionEvent event) {
-
+        stageManager.switchScene(FxmlView.ADMIN_SUBJECTS);
     }
 
     @FXML
@@ -147,6 +132,13 @@ public class AdminStudentsController implements Initializable {
         userService.remove(studentToRemove.getUser());
         reset();
         updateTable();
+        deleteAlert(studentToRemove);
+
+    }
+
+    @FXML
+    void logout(ActionEvent event) {
+        stageManager.switchScene(FxmlView.LOGIN);
     }
 
     @FXML
@@ -200,8 +192,21 @@ public class AdminStudentsController implements Initializable {
 
         }
 
-   // }
 
+        private void deleteAlert(Student student) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Successful delete");
+            alert.setHeaderText(null);
+            alert.setContentText("The student with the id  " + student.getId() +" was deleted successfully");
+            alert.showAndWait();
+        }
+
+   // }
+//    private void validateFields() {
+//        RequiredFieldValidator validator = new RequiredFieldValidator();
+//        validator.setMessage("Input required");
+//        username
+//    }
 
     private void loadUserDetails() {
         userList.clear();

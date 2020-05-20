@@ -108,13 +108,14 @@ public class Subject implements Serializable {
     }
 
 
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "subject_teacher",
             joinColumns = @JoinColumn(name = "subject_id"),
             inverseJoinColumns = @JoinColumn(name = "teacher_id"))
+    @Fetch(value = FetchMode.SUBSELECT)
     List<Teacher> teachers;
+
 
     public List<Teacher> getTeachers() {
         return teachers;

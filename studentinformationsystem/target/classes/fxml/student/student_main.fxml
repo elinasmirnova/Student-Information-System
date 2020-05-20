@@ -1,89 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pjv.controller.student.StudentMainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="566.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pjv.controller.student.StudentMainController">
    <children>
-      <VBox prefHeight="400.0" prefWidth="176.0">
+      <Pane layoutY="-3.0" prefHeight="160.0" prefWidth="566.0" style="-fx-background-color: #FFEA90;" />
+      <GridPane layoutX="17.0" layoutY="241.0" prefHeight="90.0" prefWidth="535.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="176.0">
-               <children>
-                  <Text opacity="0.94" strokeType="INSIDE" strokeWidth="0.0" style="-fx-font-size: 18;" textAlignment="CENTER" wrappingWidth="121.2060546875" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="176.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="32.0">
-                     <graphic>
-                        <ImageView fitHeight="44.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Text opacity="0.94" strokeType="INSIDE" strokeWidth="0.0" style="-fx-font-size: 18;" text="Classes" textAlignment="CENTER" wrappingWidth="121.2060546875" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="176.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="32.0">
-                     <graphic>
-                        <ImageView fitHeight="44.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Text opacity="0.94" strokeType="INSIDE" strokeWidth="0.0" style="-fx-font-size: 18;" text="Assignments" textAlignment="CENTER" wrappingWidth="121.2060546875" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="176.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="32.0">
-                     <graphic>
-                        <ImageView fitHeight="44.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Text opacity="0.94" strokeType="INSIDE" strokeWidth="0.0" style="-fx-font-size: 18;" text="Study results" textAlignment="CENTER" wrappingWidth="121.2060546875" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="176.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="32.0">
-                     <graphic>
-                        <ImageView fitHeight="44.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Text opacity="0.94" strokeType="INSIDE" strokeWidth="0.0" style="-fx-font-size: 18;" text="Exams" textAlignment="CENTER" wrappingWidth="121.2060546875" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="176.0">
-               <children>
-                  <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="32.0">
-                     <graphic>
-                        <ImageView fitHeight="44.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true" />
-                     </graphic>
-                  </Button>
-                  <Text opacity="0.94" strokeType="INSIDE" strokeWidth="0.0" style="-fx-font-size: 18;" text="Personal info" textAlignment="CENTER" wrappingWidth="121.2060546875" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" />
-               </padding>
-            </HBox>
+            <Button fx:id="subjectsButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="107.0" style="-fx-background-color: #FFEA90;" text="Subjects">
+               <graphic>
+                  <FontAwesomeIconView glyphName="LIST" size="25" />
+               </graphic>
+               <effect>
+                  <InnerShadow blurType="TWO_PASS_BOX" color="#6b6262" height="24.86" radius="14.0" width="33.14" />
+               </effect>
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="examsButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="133.0" style="-fx-background-color: #FFEA90;" text="Exams" GridPane.columnIndex="1">
+               <effect>
+                  <InnerShadow blurType="TWO_PASS_BOX" color="#6b6262" height="29.0" radius="15.1" width="33.4" />
+               </effect>
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin>
+               <graphic>
+                  <FontAwesomeIconView glyphName="BOOK" size="25" />
+               </graphic>
+            </Button>
+            <Button fx:id="assignmentsButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="128.0" style="-fx-background-color: #FFEA90;" text="Assignments" wrapText="true" GridPane.columnIndex="2">
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin>
+               <effect>
+                  <InnerShadow color="#6b6262" height="29.0" radius="15.035" width="33.14" />
+               </effect>
+               <graphic>
+                  <FontAwesomeIconView glyphName="FILE" size="25" />
+               </graphic>
+            </Button>
+            <Button fx:id="studyResultsButton" layoutX="205.0" layoutY="10.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="128.0" style="-fx-background-color: #FFEA90;" text="Study results" wrapText="true" GridPane.columnIndex="3">
+               <effect>
+                  <InnerShadow color="#6b6262" height="29.0" radius="15.035" width="33.14" />
+               </effect>
+               <graphic>
+                  <FontAwesomeIconView glyphName="EDIT" size="25" />
+               </graphic>
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin>
+            </Button>
+            <Button fx:id="personalInfoButton" layoutX="303.0" layoutY="10.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="128.0" style="-fx-background-color: #FFEA90;" text="Personal info" wrapText="true" GridPane.columnIndex="4">
+               <effect>
+                  <InnerShadow color="#6b6262" height="29.0" radius="15.035" width="33.14" />
+               </effect>
+               <graphic>
+                  <FontAwesomeIconView glyphName="USER" size="25" />
+               </graphic>
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin>
+            </Button>
          </children>
-      </VBox>
-      <HBox layoutY="-36.0" prefHeight="35.0" prefWidth="176.0" />
+      </GridPane>
    </children>
 </AnchorPane>

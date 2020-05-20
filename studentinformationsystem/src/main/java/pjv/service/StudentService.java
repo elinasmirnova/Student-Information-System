@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pjv.dao.StudentDao;
 import pjv.model.Student;
+import pjv.model.Teacher;
 import pjv.model.User;
 
 import java.util.List;
@@ -45,6 +46,11 @@ public class StudentService {
     @Transactional
     public List<Student> findAll() {
         return studentDao.findAll();
+    }
+
+    @Transactional
+    public Student findByUsername(String username) {
+        return studentDao.findByUsername(username);
     }
 
 }
