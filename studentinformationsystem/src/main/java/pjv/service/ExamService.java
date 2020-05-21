@@ -9,6 +9,9 @@ import pjv.model.Student;
 
 import java.util.List;
 
+/**
+ * Service for Exam entity
+ */
 @Service
 public class ExamService {
 
@@ -44,11 +47,21 @@ public class ExamService {
         return examDao.findAll();
     }
 
+    /**
+     * @see ExamDao
+     * @param id
+     * @return
+     */
     @Transactional
     public List<Exam> findExamsByTeacherId(Integer id) {
         return examDao.findExamsByTeacherId(id);
     }
 
+    /**
+     * @see ExamDao
+     * @param code
+     * @return
+     */
     @Transactional
     public List<Exam> findAvailableToEnrollExamsBySubject(String code) {
         return examDao.findAvailableToEnrollExamsBySubject(code);

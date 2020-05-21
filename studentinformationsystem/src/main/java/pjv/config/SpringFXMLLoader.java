@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+/**
+ * Register Spring as the FXML Controller Factory. Allows Spring and JavaFx coexist together
+ */
 @Component
 public class SpringFXMLLoader {
 
@@ -21,6 +24,12 @@ public class SpringFXMLLoader {
         this.context = context;
     }
 
+    /**
+     * Loads the FXML hierarchy as specified in the this method
+     * @param fxmlPath
+     * @return
+     * @throws IOException
+     */
     public Parent load(String fxmlPath) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setControllerFactory(context::getBean);

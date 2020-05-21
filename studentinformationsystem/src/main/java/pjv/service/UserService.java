@@ -8,6 +8,9 @@ import pjv.model.User;
 
 import java.util.List;
 
+/**
+ * Service for User entity
+ */
 @Service
 public class UserService {
 
@@ -43,6 +46,13 @@ public class UserService {
         return userDao.findAll();
     }
 
+    /**
+     * Checks if the user with this combination of the username and the password exists in the database
+     * if exists, returns true
+     * @param username
+     * @param password
+     * @return boolean
+     */
     @Transactional
     public boolean authenticate(String username, String password) {
         User user = userDao.findByUsername(username);
@@ -54,6 +64,11 @@ public class UserService {
 
     }
 
+    /**
+     * Checks role of the user by his username
+     * @param username
+     * @return String
+     */
     @Transactional
     public String checkRole(String username) {
         User user = userDao.findByUsername(username);
@@ -63,6 +78,11 @@ public class UserService {
         return null;
     }
 
+    /**
+     * Checks if user exists in database by the username
+     * @param username
+     * @return boolean
+     */
     @Transactional
     public boolean ifExists(String username) {
         return userDao.findByUsername(username) != null;

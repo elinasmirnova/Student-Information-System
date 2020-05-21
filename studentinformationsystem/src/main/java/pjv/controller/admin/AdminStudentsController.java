@@ -24,7 +24,11 @@ import pjv.view.FxmlView;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
+/**
+ *  Controller for the scene, where admin can manages students list
+ */
 @Controller
 public class AdminStudentsController implements Initializable {
 
@@ -91,11 +95,15 @@ public class AdminStudentsController implements Initializable {
 
     private static Validation validation = new Validation();
 
+    Logger LOGGER = Logger.getLogger(AdminStudentsController.class.getName());
+
     private ObservableList<Student> userList = FXCollections.observableArrayList();
     private ObservableList<Integer> years = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6);
     private ObservableList<String> programs = FXCollections.observableArrayList("Applied Informatics", "Software engineering", "Cybernetics");
 
-
+    /**
+     * Clear all the text fields
+     */
     public void reset() {
         userId.setText(null);
         username.clear();
@@ -173,7 +181,7 @@ public class AdminStudentsController implements Initializable {
                          student.setYear(year.getValue());
                          studentService.persist(student);
                          reset();
-
+                         LOGGER.fine("Student entity was persisted");
                          updateTable();
                          saveAlert(student);
                      } else {
@@ -192,8 +200,8 @@ public class AdminStudentsController implements Initializable {
                 student.setStudyProgram(studyProgram.getValue());
                 student.setYear(year.getValue());
                 studentService.update(student);
+                LOGGER.fine("Student entity was updated successfully");
                 reset();
-
                 updateTable();
                 updateAlert(student);
 
@@ -252,7 +260,10 @@ public class AdminStudentsController implements Initializable {
 
     }
 
-    public void fillTextFields() {
+    /**
+     * Fill the text fields with the information about selected student
+     */
+    private void fillTextFields() {
         Student student = userTable.getSelectionModel().getSelectedItem();
         password.setDisable(true);
         userId.setText(student.getId().toString());
@@ -267,10 +278,18 @@ public class AdminStudentsController implements Initializable {
 
     }
 
-    public void updateTable() {
+    /**
+     * Refreshes data in the table
+     */
+    private void updateTable() {
         loadUserDetails();
     }
 
+    /**
+     * Initializing scene, sets column properties in the table, loads students list and sets it to the table
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         year.setItems(years);
@@ -285,6 +304,8 @@ public class AdminStudentsController implements Initializable {
         });
 
         reset.setOnAction(event -> reset());
+
+        LOGGER.info("Canvas was rendered");
 
     }
 }

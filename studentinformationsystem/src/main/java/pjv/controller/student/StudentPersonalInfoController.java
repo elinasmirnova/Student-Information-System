@@ -19,7 +19,11 @@ import pjv.view.FxmlView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
+/**
+ * Controller for the scene with the student's personal information
+ */
 @Controller
 public class StudentPersonalInfoController implements Initializable {
 
@@ -65,9 +69,12 @@ public class StudentPersonalInfoController implements Initializable {
 
     Student student;
 
+    Logger LOGGER = Logger.getLogger(StudentPersonalInfoController.class.getName());
+
     @FXML
     void logout(ActionEvent event) {
         stageManager.switchScene(FxmlView.LOGIN);
+        LOGGER.info("Student was logged out");
     }
 
     @FXML
@@ -126,6 +133,12 @@ public class StudentPersonalInfoController implements Initializable {
         loadPhoneAddress();
     }
 
+    /**
+     * Initializing scene, loads all the information about student,
+     * sets actions to the editing button.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         student = studentService.findByUsername(LoginController.authorizationLogin);
@@ -133,9 +146,11 @@ public class StudentPersonalInfoController implements Initializable {
         editButton.setOnAction(event -> {
            if (editButton.getText().equals("Edit")) {
                 editPhoneAddress();
+               LOGGER.info("Changes have been saved");
                 editButton.setText("Save");
             } else {
                updatePhoneAddress();
+               LOGGER.info("Changes have been saved");
                editButton.setText("Edit");
             }
 

@@ -8,6 +8,9 @@ import pjv.model.Teacher;
 
 import java.util.List;
 
+/**
+ * Service for Teacher entity
+ */
 @Service
 public class TeacherService {
 
@@ -43,6 +46,11 @@ public class TeacherService {
         return teacherDao.findAll();
     }
 
+    /**
+     * @see TeacherDao
+     * @param username
+     * @return
+     */
     @Transactional
     public Teacher findByUsername(String username) {
         return teacherDao.findByUsername(username);

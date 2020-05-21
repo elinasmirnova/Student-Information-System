@@ -13,7 +13,11 @@ import pjv.view.FxmlView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
+/**
+ * Controller for the first main scene when user is logged on as an administrator
+ */
 @Controller
 public class AdminMainController implements Initializable {
 
@@ -30,12 +34,19 @@ public class AdminMainController implements Initializable {
     @Autowired
     private StageManager stageManager;
 
+    Logger LOGGER = Logger.getLogger(AdminMainController.class.getName());
+
     @FXML
     void logout(ActionEvent event) {
         stageManager.switchScene(FxmlView.LOGIN);
+        LOGGER.info("Admin was logged out");
     }
 
-
+    /**
+     * Initializing scene
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         subjectsButton.setOnAction(event -> stageManager.switchScene(FxmlView.ADMIN_SUBJECTS));

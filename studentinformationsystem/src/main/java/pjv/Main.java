@@ -8,7 +8,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import pjv.config.StageManager;
 import pjv.view.FxmlView;
 
-
+/**
+ * Main class, which starts the application
+ * @author elinasmirnova
+ */
 @SpringBootApplication
 public class Main extends Application {
 

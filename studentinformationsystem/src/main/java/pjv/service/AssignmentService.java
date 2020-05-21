@@ -10,6 +10,9 @@ import pjv.model.Subject;
 
 import java.util.List;
 
+/**
+ * Service for Assignment entity
+ */
 @Service
 public class AssignmentService {
 
@@ -45,11 +48,21 @@ public class AssignmentService {
         return dao.findAll();
     }
 
+    /**
+     * @see AssignmentDao
+     * @param id
+     * @return
+     */
     @Transactional
     public List<Assignment> findAssignmentsByTeacherId(Integer id) {
         return dao.findAssignmentsByTeacherId(id);
     }
 
+    /**
+     * @see AssignmentDao
+     * @param code
+     * @return
+     */
     @Transactional
     public List<Assignment> findAllBySubjectCode(String code) {
         return dao.findAllBySubjectCode(code);

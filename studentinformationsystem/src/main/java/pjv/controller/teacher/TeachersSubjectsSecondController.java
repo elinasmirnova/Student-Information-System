@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the modal scene on the new stage
+ */
 @Controller
 public class TeachersSubjectsSecondController  implements Initializable {
 
@@ -109,7 +112,14 @@ public class TeachersSubjectsSecondController  implements Initializable {
         table2ColLastName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudent().getLastName()));
     }
 
-
+    /**
+     * Initializing scene, sets column properties for 2 tables (the 1. table contains the list of the students,
+     * which are not enrolled to the course, the 2. table contains students list, who was enrolled to the subject)
+     * loads these students lists and sets them to the tables
+     * sets actions on the button, which allows to enroll/unenroll student
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setColumnPropertiesForTable1();

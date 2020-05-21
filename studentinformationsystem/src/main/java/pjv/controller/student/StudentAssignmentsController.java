@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import pjv.config.StageManager;
 import pjv.controller.LoginController;
+import pjv.controller.admin.AdminMainController;
 import pjv.model.Assignment;
 import pjv.model.Student;
 import pjv.model.Subject;
@@ -32,7 +33,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
+/**
+ * Controller for the scene, where student can look through the assignments
+ */
 @Controller
 public class StudentAssignmentsController implements Initializable {
 
@@ -80,10 +85,13 @@ public class StudentAssignmentsController implements Initializable {
 
     private ObservableList<Assignment> assignmentsList = FXCollections.observableArrayList();
 
+    Logger LOGGER = Logger.getLogger(StudentAssignmentsController.class.getName());
+
 
     @FXML
     void logout(ActionEvent event) {
         stageManager.switchScene(FxmlView.LOGIN);
+        LOGGER.info("Student was logged out");
     }
 
     @FXML
@@ -143,6 +151,11 @@ public class StudentAssignmentsController implements Initializable {
 
     }
 
+    /**
+     * Initializing scene, sets column properties in the table, loads assignments list and sets it to the table.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         student = studentService.findByUsername(LoginController.authorizationLogin);
@@ -154,6 +167,8 @@ public class StudentAssignmentsController implements Initializable {
 //                assignmentsTable.getSelectionModel().clearSelection();
             }
         });
+
+        LOGGER.info("Canvas was initialized");
 
     }
 }

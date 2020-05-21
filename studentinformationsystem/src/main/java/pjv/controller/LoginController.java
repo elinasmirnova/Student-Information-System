@@ -13,6 +13,9 @@ import pjv.view.FxmlView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the first scene, where user should enter his credentials and log in
+ */
 @Controller
 public class LoginController implements Initializable {
 
@@ -39,7 +42,11 @@ public class LoginController implements Initializable {
 
     public static String authorizationLogin;
 
-
+    /**
+     * Initializing scene, checks entered credentials
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
       btnLogin.setOnAction(event -> {
@@ -72,13 +79,5 @@ public class LoginController implements Initializable {
         alert.setHeaderText(null);
         alert.setContentText("Bad credentials");
         alert.showAndWait();
-    }
-
-    public String getAuthorizationLogin() {
-        return authorizationLogin;
-    }
-
-    public void setAuthorizationLogin(String authorizationLogin) {
-        this.authorizationLogin = authorizationLogin;
     }
 }

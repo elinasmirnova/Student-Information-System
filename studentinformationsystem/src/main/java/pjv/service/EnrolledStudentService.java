@@ -10,6 +10,9 @@ import pjv.model.Teacher;
 
 import java.util.List;
 
+/**
+ * Service for Enrolled Student entity (@ManyToMany relation)
+ */
 @Service
 public class EnrolledStudentService {
 
@@ -45,30 +48,62 @@ public class EnrolledStudentService {
         return dao.findAll();
     }
 
+    /**
+     * @see EnrolledStudentDao
+     * @param id
+     * @return
+     */
     @Transactional
     public List<EnrolledStudent> findStudentForSubject(Integer id) {
         return dao.findStudentsForSubject(id);
     }
+
+    /**
+     * @see EnrolledStudentDao
+     * @param id
+     * @return
+     */
     @Transactional
     public List<EnrolledStudent> findByStudentId(Integer id) {
         return dao.findByStudentId(id);
     }
 
+    /**
+     * @see EnrolledStudentDao
+     * @param id
+     * @return
+     */
     @Transactional
     public List<Integer> findSubjectsIDByStudentId(Integer id) {
         return dao.findSubjectsIDByStudentId(id);
     }
 
+    /**
+     * @see EnrolledStudentDao
+     * @param id
+     * @return
+     */
     @Transactional
     public List<Integer> findCompletedSubjectsIDByStudentId(Integer id) {
         return dao.findCompletedSubjectsIDByStudentId(id);
     }
 
+    /**
+     * @see EnrolledStudentDao
+     * @param studentId
+     * @param subjectId
+     * @return
+     */
     @Transactional
     public Object findGradeByStudentIdAndSubjectId(Integer studentId, Integer subjectId) {
         return dao.findGradeByStudentIdAndSubjectId(studentId, subjectId);
     }
 
+    /**
+     * @see EnrolledStudentDao
+     * @param id
+     * @return
+     */
     @Transactional
     public List<Integer> findEnrolledSubjectsByStudentId(Integer id) {
         return dao.findEnrolledSubjectsByStudentId(id);

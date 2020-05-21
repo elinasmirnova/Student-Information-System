@@ -27,7 +27,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
+/**
+ * Controller for the scene, where admin can manages subjects list
+ */
 @Controller
 public class AdminSubjectsController implements Initializable {
 
@@ -98,6 +102,8 @@ public class AdminSubjectsController implements Initializable {
     @Autowired
     private TeacherService teacherService;
 
+    Logger LOGGER = Logger.getLogger(AdminSubjectsController.class.getName());
+
     private static Validation validation = new Validation();
 
     private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
@@ -129,6 +135,7 @@ public class AdminSubjectsController implements Initializable {
     void deleteSubject(ActionEvent event) {
         Subject subjectToDelete = subjectsTable.getSelectionModel().getSelectedItem();
         subjectService.remove(subjectToDelete);
+        LOGGER.info("Subject was removed successfully");
         reset();
         updateTable();
         deleteAlert(subjectToDelete);
@@ -155,6 +162,7 @@ public class AdminSubjectsController implements Initializable {
                     List<Teacher> checkedTeachers = getCheckedTeachers();
                     subject.setTeachers(checkedTeachers);
                     subjectService.persist(subject);
+                    LOGGER.info("Subject entity was persisted");
                     // setSubjectToTeachers(checkedTeachers, subject);
                     updateTable();
                     reset();
@@ -173,6 +181,8 @@ public class AdminSubjectsController implements Initializable {
                 List<Teacher> checkedTeachers = getCheckedTeachers();
                 subject.setTeachers(checkedTeachers);
                 subjectService.update(subject);
+
+                LOGGER.info("Subject entity was updated successfully");
 
                 updateTable();
                 reset();
@@ -224,7 +234,7 @@ public class AdminSubjectsController implements Initializable {
 
     }
 
-    public void getAllTeachersList() {
+    private void getAllTeachersList() {
         StringBuilder builder;
         List<Teacher> list = teacherService.findAll();
         for (Teacher teacher : list ) {
@@ -240,13 +250,20 @@ public class AdminSubjectsController implements Initializable {
         }
     }
 
-    public void fillComboBoxTeachers() {
+    /**
+     * Fills combo box with teachers list
+     */
+    private void fillComboBoxTeachers() {
         getAllTeachersList();
         //teachersTest2.setItems(teachersList);
         teachersTest1.getItems().addAll(teachersList);
     }
 
-    public List<Teacher> getCheckedTeachers() {
+    /**
+     * Returns selected teachers from combo box in list
+     * @return
+     */
+    private List<Teacher> getCheckedTeachers() {
         List<Teacher> teachers = new ArrayList<>();
         ObservableList<String> checkedTeachersString = teachersTest1.getCheckModel().getCheckedItems();
         for (String teacherString : checkedTeachersString) {
@@ -256,7 +273,10 @@ public class AdminSubjectsController implements Initializable {
         return teachers;
     }
 
-    public void reset() {
+    /**
+     * Clear text fields
+     */
+    private void reset() {
         subjectId.setText(null);
         mainLabel.setText("Add New Subject");
         saveSubject.setText("Save");
@@ -270,13 +290,16 @@ public class AdminSubjectsController implements Initializable {
         teachersTest1.getCheckModel().clearChecks();
     }
 
-    public void loadSubjectsDetails() {
+    /**
+     * Fills table with subjects
+     */
+    private void loadSubjectsDetails() {
         subjectsList.clear();
         subjectsList.addAll(subjectService.findAll());
         subjectsTable.setItems(subjectsList);
     }
 
-    public void setColumnProperties(){
+    private void setColumnProperties(){
         colUserId.setCellValueFactory(cellData -> new SimpleObjectProperty(cellData.getValue().getId()));
         colCode.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCode()));
         colName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
@@ -286,11 +309,17 @@ public class AdminSubjectsController implements Initializable {
 
     }
 
-    public void updateTable() {
+    /**
+     * Refreshes data in the table
+     */
+    private void updateTable() {
         loadSubjectsDetails();
     }
 
-    public void fillTextFields() {
+    /**
+     * Fill the text fields with the information about selected subject
+     */
+    private void fillTextFields() {
         reset();
         mainLabel.setText("Edit subject");
         saveSubject.setText("Edit");
@@ -319,13 +348,19 @@ public class AdminSubjectsController implements Initializable {
         }
     }
 
-    public List<Integer> extractTeachers(Subject subject) {
+    private List<Integer> extractTeachers(Subject subject) {
         List<Integer> idsTeachers = new ArrayList<>();
         subjectService.find(subject.getId()).getTeachers().forEach( t -> idsTeachers.add(t.getId()));
        //subject.getTeachers().forEach( t -> idsTeachers.add(t.getId()));
         return idsTeachers;
     }
 
+    /**
+     * Initializing scene, sets column properties in the table, loads subject list and sets it to the table,
+     * fills combo box with the teachers list
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         role.setItems(rolesList);
@@ -341,5 +376,6 @@ public class AdminSubjectsController implements Initializable {
         });
 
         reset.setOnAction(event -> reset());
+        LOGGER.info("Canvas was rendered");
     }
 }

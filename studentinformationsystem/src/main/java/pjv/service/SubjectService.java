@@ -8,6 +8,9 @@ import pjv.model.Subject;
 
 import java.util.List;
 
+/**
+ * Service for Subject entity
+ */
 @Service
 public class SubjectService {
 
@@ -43,16 +46,31 @@ public class SubjectService {
         return subjectDao.findAll();
     }
 
+    /**
+     * @see SubjectDao
+     * @param id
+     * @return
+     */
     @Transactional
     public List<Integer> findSubjectsIDForTeacher(Integer id) {
         return subjectDao.findSubjectsIDForTeacher(id);
     }
 
+    /**
+     * @see SubjectDao
+     * @param code
+     * @return
+     */
     @Transactional
     public Subject findSubjectByCode(String code) {
         return subjectDao.findSubjectByCode(code);
     }
 
+    /**
+     * Checks if subject with this code exists in the database
+     * @param code
+     * @return boolean
+     */
     @Transactional
     public boolean ifExists(String code) {
         return subjectDao.findSubjectByCode(code) == null;

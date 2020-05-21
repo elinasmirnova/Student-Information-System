@@ -37,7 +37,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
+/**
+ * Controller for the scene, where teacher is allowed to manages exams
+ */
 @Controller
 public class TeacherExamsController implements Initializable {
 
@@ -119,6 +123,8 @@ public class TeacherExamsController implements Initializable {
 
     Teacher teacher;
 
+    Logger LOGGER = Logger.getLogger(TeacherExamsController.class.getName());
+
     private static Validation validation = new Validation();
 
     private ObservableList<Exam> examsList = FXCollections.observableArrayList();
@@ -129,12 +135,14 @@ public class TeacherExamsController implements Initializable {
     @FXML
     void logout(ActionEvent event) {
         stageManager.switchScene(FxmlView.LOGIN);
+        LOGGER.info("Teacher was logged out");
     }
 
     @FXML
     void deleteExam(ActionEvent event) {
         Exam examToRemove = examsTable.getSelectionModel().getSelectedItem();
         examService.remove(examToRemove);
+        LOGGER.info("Exam was removed successfully");
         reset();
         updateTable();
         deleteAlert(examToRemove);
@@ -160,6 +168,7 @@ public class TeacherExamsController implements Initializable {
                 exam.setSubject(subjectService.findSubjectByCode(subjectCode.getValue()));
                 exam.setTeacher(teacher);
                 examService.persist(exam);
+                LOGGER.info("Exam was persisted successfully");
                 reset();
                 updateTable();
                 saveAlert(exam);
@@ -173,6 +182,7 @@ public class TeacherExamsController implements Initializable {
                 exam.setDate(date.getValue());
                 exam.setTime(timePicker.getValue().toString());
                 examService.update(exam);
+                LOGGER.info("Exam was updated");
                 reset();
                 updateTable();
                 updateAlert(exam);
@@ -264,11 +274,11 @@ public class TeacherExamsController implements Initializable {
         });
     }
 
-    public void updateTable() {
-        loadSubjectsDetails();
+    private void updateTable() {
+        loadExamsDetails();
     }
 
-    public void loadSubjectsDetails() {
+    private void loadExamsDetails() {
         examsList.clear();
         examsList.addAll(examService.findExamsByTeacherId(teacher.getId()));
         examsTable.setItems(examsList);
@@ -303,6 +313,13 @@ public class TeacherExamsController implements Initializable {
 
     }
 
+    /**
+     * Initializing scene, sets column properties in the table,
+     * loads and sets list of the exams to the table,
+     * sets subjects codes to the check box
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         teacher = teacherService.findByUsername(LoginController.authorizationLogin);
@@ -310,7 +327,7 @@ public class TeacherExamsController implements Initializable {
         setColumnAvailableProperties();
         classroom.setItems(classroomList);
         loadSubjectCodesToCheckBox();
-        loadSubjectsDetails();
+        loadExamsDetails();
 
         examsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -320,5 +337,6 @@ public class TeacherExamsController implements Initializable {
         });
 
         reset.setOnAction(event -> reset());
+        LOGGER.info("Canvas was initialized");
     }
 }

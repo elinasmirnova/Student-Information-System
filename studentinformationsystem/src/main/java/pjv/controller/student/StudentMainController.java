@@ -12,7 +12,11 @@ import pjv.view.FxmlView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
+/**
+ * Controller for the main scene for the student
+ */
 @Controller
 public class StudentMainController implements Initializable {
 
@@ -35,11 +39,19 @@ public class StudentMainController implements Initializable {
     @Autowired
     private StageManager stageManager;
 
+    Logger LOGGER = Logger.getLogger(StudentMainController.class.getName());
+
     @FXML
     void logout(ActionEvent event) {
         stageManager.switchScene(FxmlView.LOGIN);
+        LOGGER.info("Student was logged out");
     }
 
+    /**
+     * Initializing scene, sets actions on clicking the redirecting buttons.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         subjectsButton.setOnAction(event -> stageManager.switchScene(FxmlView.STUDENT_SUBJECTS));

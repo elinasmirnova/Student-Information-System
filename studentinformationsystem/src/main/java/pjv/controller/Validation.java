@@ -5,8 +5,17 @@ import javafx.scene.control.Alert;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Validation fields
+ */
 public class Validation {
-
+    /**
+     * Validation method
+     * @param field which field will be validated
+     * @param value value, which will be validated
+     * @param pattern pattern, which contains regular expression
+     * @return
+     */
     public boolean validate(String field, String value, String pattern) {
         if (!value.isEmpty()) {
             Pattern p = Pattern.compile(pattern);
@@ -23,6 +32,12 @@ public class Validation {
         }
     }
 
+    /**
+     * Validate if the field is empty
+     * @param field
+     * @param empty
+     * @return
+     */
     public boolean emptyValidation(String field, boolean empty){
         if(!empty){
             return true;

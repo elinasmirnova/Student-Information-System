@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import pjv.config.StageManager;
 import pjv.controller.LoginController;
 import pjv.controller.Validation;
+import pjv.controller.student.StudentSubjectsController;
 import pjv.model.Assignment;
 import pjv.model.Exam;
 import pjv.model.Subject;
@@ -30,7 +31,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
+/**
+ * Controller for the scene, where teacher is allowed to manages assignments for students
+ */
 @Controller
 public class TeacherAssignmentsController implements Initializable {
 
@@ -93,6 +98,7 @@ public class TeacherAssignmentsController implements Initializable {
     private SubjectService subjectService;
 
     private static Validation validation = new Validation();
+    Logger LOGGER = Logger.getLogger(TeacherAssignmentsController.class.getName());
 
     private ObservableList<Assignment> assignmentsList = FXCollections.observableArrayList();
     private ObservableList<String> subjectCodes = FXCollections.observableArrayList();
@@ -102,6 +108,7 @@ public class TeacherAssignmentsController implements Initializable {
     void delete(ActionEvent event) {
         Assignment assignment = assignmentsTable.getSelectionModel().getSelectedItem();
         assignmentService.remove(assignment);
+        LOGGER.info("Assignment was removed");
         reset();
         updateTable();
         deleteAlert(assignment);
@@ -125,6 +132,7 @@ public class TeacherAssignmentsController implements Initializable {
                 assignment.setTeacher(teacher);
 
                 assignmentService.persist(assignment);
+                LOGGER.info("Assignment was persisted successfully");
 
                 updateTable();
                 reset();
@@ -140,6 +148,7 @@ public class TeacherAssignmentsController implements Initializable {
                 existingAssignment.setSubject(subjectService.findSubjectByCode(subjectCode.getValue()));
 
                 assignmentService.update(existingAssignment);
+                LOGGER.info("Assignment was updated successfully");
 
                 updateTable();
                 reset();
@@ -153,6 +162,7 @@ public class TeacherAssignmentsController implements Initializable {
     @FXML
     void logout(ActionEvent event) {
         stageManager.switchScene(FxmlView.LOGIN);
+        LOGGER.info("Teacher was logged out");
     }
 
     @FXML
@@ -214,7 +224,7 @@ public class TeacherAssignmentsController implements Initializable {
 
     }
 
-    public void updateTable() {
+    private void updateTable() {
         loadAssignmentsDetails();
     }
 
@@ -228,7 +238,7 @@ public class TeacherAssignmentsController implements Initializable {
 
     }
 
-    public void loadAssignmentsDetails() {
+    private void loadAssignmentsDetails() {
         assignmentsList.clear();
         assignmentsList.addAll(assignmentService.findAssignmentsByTeacherId(teacher.getId()));
         assignmentsTable.setItems(assignmentsList);
@@ -247,7 +257,12 @@ public class TeacherAssignmentsController implements Initializable {
 
     }
 
-
+    /**
+     * Initializing scene, sets column properties in the table,
+     * loads list of the assignments and sets subjects codes to the check box
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         teacher = teacherService.findByUsername(LoginController.authorizationLogin);
@@ -263,5 +278,6 @@ public class TeacherAssignmentsController implements Initializable {
         });
 
         reset.setOnAction(event -> reset());
+        LOGGER.info("Canvas was initialized");
     }
 }

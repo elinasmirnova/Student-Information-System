@@ -25,7 +25,11 @@ import pjv.view.FxmlView;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
+/**
+ * Controller for the scene with the student's enrolled subjects
+ */
 @Controller
 public class StudentSubjectsController implements Initializable {
 
@@ -59,11 +63,14 @@ public class StudentSubjectsController implements Initializable {
 
     Student student;
 
+    Logger LOGGER = Logger.getLogger(StudentSubjectsController.class.getName());
+
     private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
 
     @FXML
     void logout(ActionEvent event) {
         stageManager.switchScene(FxmlView.LOGIN);
+        LOGGER.info("Student was logged out");
     }
 
     @FXML
@@ -109,11 +116,17 @@ public class StudentSubjectsController implements Initializable {
         creditsColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCredits()));
     }
 
-
+    /**
+     * Initializing scene, sets column properties in the table,
+     * loads list of the enrolled subjects, what the student has in the current semester
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         student = studentService.findByUsername(LoginController.authorizationLogin);
         setColumnProperties();
         loadStudyResults();
+        LOGGER.info("Canvas was initialized");
     }
 }

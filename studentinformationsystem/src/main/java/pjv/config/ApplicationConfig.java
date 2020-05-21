@@ -9,6 +9,10 @@ import org.springframework.context.annotation.Lazy;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+/**
+ * Application Configuration
+ * @author elinasmirnova
+ */
 @Configuration
 public class ApplicationConfig {
 
@@ -26,6 +30,12 @@ public class ApplicationConfig {
         return ResourceBundle.getBundle("Bundle");
     }
 
+    /**
+     * Stage will be created after spring context loads 
+     * @param stage
+     * @return
+     * @throws IOException
+     */
     @Bean
     @Lazy(value = true)
     public StageManager stageManager(Stage stage) throws IOException {

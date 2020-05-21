@@ -12,6 +12,9 @@ import pjv.model.User;
 
 import java.util.List;
 
+/**
+ * Service for Student entity
+ */
 @Service
 //@Configurable(preConstruction = true, autowire = Autowire.BY_NAME)
 public class StudentService {
@@ -48,6 +51,11 @@ public class StudentService {
         return studentDao.findAll();
     }
 
+    /**
+     * @see StudentDao
+     * @param username
+     * @return
+     */
     @Transactional
     public Student findByUsername(String username) {
         return studentDao.findByUsername(username);

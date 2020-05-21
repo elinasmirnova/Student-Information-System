@@ -11,6 +11,9 @@ import java.util.Objects;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
+/**
+ * Responsible for switching scenes on the primary stage
+ */
 public class StageManager {
 
     private static final Logger LOG = getLogger(StageManager.class);
@@ -22,6 +25,10 @@ public class StageManager {
         this.primaryStage = stage;
     }
 
+    /**
+     * Switching scenes itself
+     * @param view FxmlView is enum, where all the scenes and paths to them were defined
+     */
     public void switchScene(FxmlView view) {
         Parent viewRootNodeHierarchy = loadViewNodeHierarchy(view.getFxmlFile());
         show(viewRootNodeHierarchy, view.getTitle());

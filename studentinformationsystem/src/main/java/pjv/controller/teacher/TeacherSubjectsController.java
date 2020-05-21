@@ -44,7 +44,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
+/**
+ * Controller for the scene, where teachers can look through their courses and enrolled students,
+ * also teacher can manage students list and adjust study results
+ */
 @Controller
 public class TeacherSubjectsController implements Initializable {
 
@@ -126,6 +131,8 @@ public class TeacherSubjectsController implements Initializable {
 
     Teacher teacher;
 
+    Logger LOGGER = Logger.getLogger(TeacherSubjectsController.class.getName());
+
     private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
     public static ObservableList<EnrolledStudent> studentsList = FXCollections.observableArrayList();
 
@@ -137,6 +144,7 @@ public class TeacherSubjectsController implements Initializable {
     @FXML
     void logout(ActionEvent event) {
         stageManager.switchScene(FxmlView.LOGIN);
+        LOGGER.info("Teacher was logged out");
     }
 
     @FXML
@@ -205,11 +213,11 @@ public class TeacherSubjectsController implements Initializable {
         studentsColGrade.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGrade()));
     }
 
-    public void updateTable() {
+    private void updateTable() {
         loadSubjectsDetails();
     }
 
-    public void loadStudentsListForSubject(Subject subject) {
+    private void loadStudentsListForSubject(Subject subject) {
         enrolledStudentService = Main.context.getBean(EnrolledStudentService.class);
         subjectId.setText(subject.getId().toString());
         code.setText(subject.getCode());
@@ -231,13 +239,17 @@ public class TeacherSubjectsController implements Initializable {
         studentsTable.setItems(studentsList);
     }
 
-    public void reset() {
+    private void reset() {
         subjectId.setText(null);
         code.clear();
         studentsTable.getItems().clear();
     }
 
-
+    /**
+     * Initializing scene, sets column properties to subjects table and students table
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setColumnSubjectsProperties();
@@ -289,7 +301,7 @@ public class TeacherSubjectsController implements Initializable {
 
         reset.setOnAction(event -> reset());
 
-
+        LOGGER.info("Canvas was initialized");
 
     }
 }

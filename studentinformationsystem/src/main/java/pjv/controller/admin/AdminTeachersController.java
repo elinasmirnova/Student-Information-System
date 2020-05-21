@@ -26,7 +26,11 @@ import pjv.view.FxmlView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
+/**
+ * Controller for the scene, where admin can manages teachers list
+ */
 @Controller
 public class AdminTeachersController implements Initializable {
 
@@ -85,7 +89,9 @@ public class AdminTeachersController implements Initializable {
     @Autowired
     private UserService userService;
 
-    private Validation validation;
+    Logger LOGGER = Logger.getLogger(AdminTeachersController.class.getName());
+
+    private static Validation validation = new Validation();
 
     private ObservableList<Teacher> teachersList = FXCollections.observableArrayList();
     private ObservableList<String> degrees = FXCollections.observableArrayList("Bc.", "Mgr.", "Ing.", "RNDr.", "Ph.D.");
@@ -112,6 +118,9 @@ public class AdminTeachersController implements Initializable {
         stageManager.switchScene(FxmlView.ADMIN_SUBJECTS);
     }
 
+    /**
+     * Clear text fields
+     */
     public void reset() {
         userId.setText(null);
         username.clear();
@@ -129,6 +138,7 @@ public class AdminTeachersController implements Initializable {
         Teacher teacherToRemove = userTable.getSelectionModel().getSelectedItem();
         teacherService.remove(teacherToRemove);
         userService.remove(teacherToRemove.getUser());
+        LOGGER.info("Teacher was removed successfully");
         reset();
         updateTable();
         deleteAlert(teacherToRemove);
@@ -163,6 +173,7 @@ public class AdminTeachersController implements Initializable {
                         teacher.setDepartment(department.getValue());
 
                         teacherService.persist(teacher);
+                        LOGGER.info("Teacher entity was persisted");
 
                         reset();
                         updateTable();
@@ -184,6 +195,7 @@ public class AdminTeachersController implements Initializable {
                 teacher.setDepartment(department.getValue());
 
                 teacherService.update(teacher);
+                LOGGER.info("Teacher entity was updated");
 
                 reset();
                 updateTable();
@@ -244,7 +256,8 @@ public class AdminTeachersController implements Initializable {
 
     }
 
-    public void fillTextFields() {
+
+    private void fillTextFields() {
         Teacher teacher = userTable.getSelectionModel().getSelectedItem();
         password.setDisable(true);
         userId.setText(teacher.getId().toString());
@@ -257,11 +270,15 @@ public class AdminTeachersController implements Initializable {
         password.setDisable(true);
     }
 
-    public void updateTable() {
+    private void updateTable() {
         loadUserDetails();
     }
 
-
+    /**
+     * Initializing scene, sets column properties in the table, loads teachers list and sets it to the table.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         degree.setItems(degrees);
@@ -276,6 +293,7 @@ public class AdminTeachersController implements Initializable {
         });
 
         reset.setOnAction(event -> reset());
+        LOGGER.info("Canvas was rendered");
 
     }
 }

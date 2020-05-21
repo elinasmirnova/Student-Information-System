@@ -2,6 +2,9 @@ package pjv.view;
 
 import java.util.ResourceBundle;
 
+/**
+ * Enum which contains all the scenes and paths to them
+ */
 public enum FxmlView {
 
     ADMIN_MAIN {

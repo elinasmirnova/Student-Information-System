@@ -30,7 +30,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
+/**
+ * Controller for the scene, where student can look through the available exams and enrolled to them.
+ */
 @Controller
 public class StudentExamsController implements Initializable {
 
@@ -76,6 +80,8 @@ public class StudentExamsController implements Initializable {
 
     Student student;
 
+    Logger LOGGER = Logger.getLogger(StudentExamsController.class.getName());
+
     private ObservableList<Exam> examsList = FXCollections.observableArrayList();
     private ObservableList<String> subjectCodesList = FXCollections.observableArrayList();
 
@@ -89,6 +95,7 @@ public class StudentExamsController implements Initializable {
     @FXML
     void logout(ActionEvent event) {
         stageManager.switchScene(FxmlView.LOGIN);
+        LOGGER.info("Student was logged out");
     }
 
     @FXML
@@ -191,10 +198,17 @@ public class StudentExamsController implements Initializable {
 
     }
 
+    /**
+     * Initializing scene, loads subjects list to the combo box,
+     * sets column properties in the table.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         student = studentService.findByUsername(LoginController.authorizationLogin);
         loadSubjects();
         setColumnProperties();
+        LOGGER.info("Canvas was initialized");
     }
 }
