@@ -1,5 +1,9 @@
 package pjv.controller.admin;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -13,10 +17,12 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import pjv.config.StageManager;
 import pjv.controller.Validation;
+import pjv.model.Student;
 import pjv.model.Teacher;
 import pjv.model.User;
 import pjv.service.TeacherService;
 import pjv.service.UserService;
+import pjv.view.FxmlView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,43 +31,28 @@ import java.util.ResourceBundle;
 public class AdminTeachersController implements Initializable {
 
     @FXML
-    private MenuItem homeMenuItem;
-
-    @FXML
-    private MenuItem studentsMenuItem;
-
-    @FXML
-    private MenuItem subjectsMenuItem;
-
-    @FXML
     private Label userId;
 
     @FXML
-    private TextField username;
+    private JFXTextField username;
 
     @FXML
-    private TextField firstName;
+    private JFXTextField firstName;
 
     @FXML
-    private TextField lastName;
+    private JFXTextField lastName;
 
     @FXML
-    private ComboBox<String> degree;
+    private JFXComboBox<String> degree;
 
     @FXML
-    private ComboBox<String> department;
+    private JFXComboBox<String> department;
 
     @FXML
-    private PasswordField password;
+    private JFXPasswordField password;
 
     @FXML
-    private Button reset;
-
-    @FXML
-    private Button saveUser;
-
-    @FXML
-    private Button btnLogout;
+    private JFXButton reset;
 
     @FXML
     private TableView<Teacher> userTable;
@@ -84,9 +75,6 @@ public class AdminTeachersController implements Initializable {
     @FXML
     private TableColumn<Teacher, String> colLastName;
 
-    @FXML
-    private MenuItem deleteUsers;
-
     @Lazy
     @Autowired
     private StageManager stageManager;
@@ -103,20 +91,25 @@ public class AdminTeachersController implements Initializable {
     private ObservableList<String> degrees = FXCollections.observableArrayList("Bc.", "Mgr.", "Ing.", "RNDr.", "Ph.D.");
     private ObservableList<String> departments = FXCollections.observableArrayList("Computer Science", "Cybernetics", "Software engineering", "Mathematics");
 
+    @FXML
+    void logout(ActionEvent event) {
+        stageManager.switchScene(FxmlView.LOGIN);
+    }
+
 
     @FXML
     void toHome(ActionEvent event) {
-
+        stageManager.switchScene(FxmlView.ADMIN_MAIN);
     }
 
     @FXML
     void toStudents(ActionEvent event) {
-
+        stageManager.switchScene(FxmlView.ADMIN_STUDENTS);
     }
 
     @FXML
     void toSubjects(ActionEvent event) {
-
+        stageManager.switchScene(FxmlView.ADMIN_SUBJECTS);
     }
 
     public void reset() {
@@ -138,6 +131,7 @@ public class AdminTeachersController implements Initializable {
         userService.remove(teacherToRemove.getUser());
         reset();
         updateTable();
+        deleteAlert(teacherToRemove);
     }
 
     @FXML
@@ -145,33 +139,40 @@ public class AdminTeachersController implements Initializable {
 
         if (validation.validate("First Name", firstName.getText(), "[a-zA-Z]+") &&
                 validation.validate("Last Name", lastName.getText(), "[a-zA-Z]+") &&
-                validation.validate("Username", username.getText(), "[a-zA-Z0-9][a-zA-Z0-9._]") &&
                 validation.emptyValidation("Degree", degree.getSelectionModel().getSelectedItem() == null) &&
                 validation.emptyValidation("Department", department.getSelectionModel().getSelectedItem() == null)) {
 
             if (userId.getText() == null || userId.getText() == "") {
-//                if(validate("Email", getEmail(), "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+") &&
-//                        emptyValidation("Password", getPassword().isEmpty())){
 
-//                if (validation.emptyValidation("Password", password.getText().isEmpty())) {
-                Teacher teacher = new Teacher();
-                teacher.setFirstName(firstName.getText());
-                User user = new User();
-                user.setRole("teacher");
-                user.setUsername(username.getText());
-                user.setPassword(password.getText());
-                userService.persist(user);
+                if (validation.emptyValidation("Password", password.getText().isEmpty())
+                        && validation.validate("Username", username.getText(), "[a-zA-Z0-9]+")) {
 
-                teacher.setUser(user);
-                teacher.setLastName(lastName.getText());
-                teacher.setDegree(degree.getValue());
-                teacher.setDepartment(department.getValue());
+                    if (!userService.ifExists(username.getText())) {
 
-                teacherService.persist(teacher);
+                        Teacher teacher = new Teacher();
+                        teacher.setFirstName(firstName.getText());
+                        User user = new User();
+                        user.setRole("teacher");
+                        user.setUsername(username.getText());
+                        user.setPassword(password.getText());
+                        userService.persist(user);
 
-                reset(); //TODO: pridat alert
-                updateTable();
+                        teacher.setUser(user);
+                        teacher.setLastName(lastName.getText());
+                        teacher.setDegree(degree.getValue());
+                        teacher.setDepartment(department.getValue());
 
+                        teacherService.persist(teacher);
+
+                        reset();
+                        updateTable();
+                        saveAlert(teacher);
+
+                    } else {
+                        usernameAlreadyExists();
+                    }
+
+                }
 
             } else {
 
@@ -184,13 +185,46 @@ public class AdminTeachersController implements Initializable {
 
                 teacherService.update(teacher);
 
-                reset(); //TODO: pridat alert
+                reset();
                 updateTable();
+
+                updateAlert(teacher);
 
             }
 
         }
 
+    }
+
+    private void usernameAlreadyExists() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Validation Error");
+        alert.setHeaderText(null);
+        alert.setContentText("User with this username already exists. Please use a different username");
+    }
+
+    private void deleteAlert(Teacher teacher) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful delete");
+        alert.setHeaderText(null);
+        alert.setContentText("The student with the id  " + teacher.getId() +" was deleted successfully");
+        alert.showAndWait();
+    }
+
+    private void saveAlert(Teacher teacher){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful save");
+        alert.setHeaderText(null);
+        alert.setContentText("The student with the id  "+ teacher.getId() +" has been created.");
+        alert.showAndWait();
+    }
+
+    private void updateAlert(Teacher teacher){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful update");
+        alert.setHeaderText(null);
+        alert.setContentText("The student with the id  "+ teacher.getId() +" has been updated.");
+        alert.showAndWait();
     }
 
 

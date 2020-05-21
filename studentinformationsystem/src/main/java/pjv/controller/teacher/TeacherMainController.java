@@ -1,5 +1,6 @@
 package pjv.controller.teacher;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -27,6 +28,11 @@ public class TeacherMainController implements Initializable {
     @Lazy
     @Autowired
     private StageManager stageManager;
+
+    @FXML
+    void logout(ActionEvent event) {
+        stageManager.switchScene(FxmlView.LOGIN);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

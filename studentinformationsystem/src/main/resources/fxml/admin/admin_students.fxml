@@ -126,7 +126,7 @@
                         <DropShadow />
                      </effect>
                   </JFXButton>
-                  <JFXButton fx:id="saveUser" buttonType="RAISED" minHeight="-Infinity" minWidth="-Infinity" onAction="#save" prefHeight="27.0" prefWidth="51.0" style="-fx-background-color: #ffebee;" text="Save" textOverrun="CLIP">
+                  <JFXButton fx:id="saveUser" buttonType="RAISED" minHeight="-Infinity" minWidth="-Infinity" onAction="#save" prefHeight="27.0" prefWidth="53.0" style="-fx-background-color: #ffebee;" text="Save" textOverrun="CLIP">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

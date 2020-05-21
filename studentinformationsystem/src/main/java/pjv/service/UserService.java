@@ -63,4 +63,9 @@ public class UserService {
         return null;
     }
 
+    @Transactional
+    public boolean ifExists(String username) {
+        return userDao.findByUsername(username) != null;
+    }
+
 }

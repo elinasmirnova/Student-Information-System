@@ -1,6 +1,6 @@
 package pjv.controller.teacher;
 
-import com.jfoenix.controls.JFXTimePicker;
+import com.jfoenix.controls.*;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -15,12 +15,16 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
+import pjv.config.StageManager;
 import pjv.controller.LoginController;
+import pjv.controller.Validation;
 import pjv.model.*;
 import pjv.service.ExamService;
 import pjv.service.SubjectService;
 import pjv.service.TeacherService;
+import pjv.view.FxmlView;
 import sun.java2d.pipe.SpanShapeRenderer;
 
 import java.net.URL;
@@ -38,52 +42,37 @@ import java.util.ResourceBundle;
 public class TeacherExamsController implements Initializable {
 
     @FXML
-    private MenuItem homeMenuItem;
-
-    @FXML
-    private MenuItem subjectsMenuItem;
-
-    @FXML
-    private MenuItem homeMenuItem1;
-
-    @FXML
-    private Menu assignmentsMenuItem;
-
-    @FXML
     private Label label;
 
     @FXML
     private Label examId;
 
     @FXML
-    private ComboBox<String> subjectCode;
+    private JFXComboBox<String> subjectCode;
 
     @FXML
-    private DatePicker date;
-
-    @FXML
-    private TextField capacity;
+    private JFXDatePicker date;
 
     @FXML
     private JFXTimePicker timePicker;
 
     @FXML
-    private RadioButton rbAvailable;
+    private JFXTextField capacity;
 
     @FXML
-    private RadioButton rbNotAvailable;
+    private JFXRadioButton rbAvailable;
 
     @FXML
-    private ComboBox<String> classroom;
+    private JFXRadioButton rbNotAvailable;
 
     @FXML
-    private Button reset;
+    private JFXComboBox<String> classroom;
 
     @FXML
-    private Button saveExam;
+    private JFXButton reset;
 
     @FXML
-    private Button btnLogout;
+    private JFXButton saveExam;
 
     @FXML
     private TableView<Exam> examsTable;
@@ -113,7 +102,7 @@ public class TeacherExamsController implements Initializable {
     private TableColumn<Exam, Boolean> colAvailable;
 
     @FXML
-    private MenuItem deleteUsers;
+    private MenuItem deleteExam;
 
     @Autowired
     private ExamService examService;
@@ -124,14 +113,23 @@ public class TeacherExamsController implements Initializable {
     @Autowired
     private SubjectService subjectService;
 
+    @Lazy
+    @Autowired
+    private StageManager stageManager;
+
     Teacher teacher;
+
+    private static Validation validation = new Validation();
 
     private ObservableList<Exam> examsList = FXCollections.observableArrayList();
     private ObservableList<String> subjectCodes = FXCollections.observableArrayList();
     private ObservableList<String> classroomList = FXCollections.observableArrayList("T2:D309", "K:E107", "T2:D209", "T2:D337" );
 
+
     @FXML
-    private MenuItem deleteExam;
+    void logout(ActionEvent event) {
+        stageManager.switchScene(FxmlView.LOGIN);
+    }
 
     @FXML
     void deleteExam(ActionEvent event) {
@@ -139,49 +137,87 @@ public class TeacherExamsController implements Initializable {
         examService.remove(examToRemove);
         reset();
         updateTable();
+        deleteAlert(examToRemove);
     }
 
     @FXML
     void save(ActionEvent event) throws ParseException {
-        if (examId.getText().equals("") || examId.getText() == null) {
-            Exam exam = new Exam();
-            exam.setCapacity(Integer.parseInt(capacity.getText()));
-            exam.setClassroom(classroom.getValue());
-            exam.setAvailable(rbAvailable.isSelected());
-            exam.setDate(date.getValue());
-            exam.setTime(timePicker.getValue().toString());
-            exam.setSubject(subjectService.findSubjectByCode(subjectCode.getValue()));
-            exam.setTeacher(teacher);
-            examService.persist(exam);
-            updateTable();
+
+            if (validation.validate("capacity", capacity.getText(), "[1-100]") &&
+                validation.emptyValidation("subject code", subjectCode.getSelectionModel().getSelectedItem() == null) &&
+                validation.emptyValidation("date", date.getEditor().getText().isEmpty()) &&
+                validation.emptyValidation("time", timePicker.getEditor().getText().isEmpty()) &&
+                (rbAvailable.isSelected() || rbNotAvailable.isSelected()) &&
+        validation.emptyValidation("classroom", classroom.getSelectionModel().getSelectedItem() == null)) {
+
+            if (examId.getText().equals("") || examId.getText() == null) {
+                Exam exam = new Exam();
+                exam.setCapacity(Integer.parseInt(capacity.getText()));
+                exam.setClassroom(classroom.getValue());
+                exam.setAvailable(rbAvailable.isSelected());
+                exam.setDate(date.getValue());
+                exam.setTime(timePicker.getValue().toString());
+                exam.setSubject(subjectService.findSubjectByCode(subjectCode.getValue()));
+                exam.setTeacher(teacher);
+                examService.persist(exam);
+                reset();
+                updateTable();
+                saveAlert(exam);
 
 
-        } else {
-            Exam exam = examService.find(Integer.parseInt(examId.getText()));
-            exam.setCapacity(Integer.parseInt(capacity.getText()));
-            exam.setClassroom(classroom.getValue());
-            exam.setAvailable(rbAvailable.isSelected());
-            exam.setDate(date.getValue());
-            exam.setTime(timePicker.getValue().toString());
-            examService.update(exam);
-            updateTable();
+            } else {
+                Exam exam = examService.find(Integer.parseInt(examId.getText()));
+                exam.setCapacity(Integer.parseInt(capacity.getText()));
+                exam.setClassroom(classroom.getValue());
+                exam.setAvailable(rbAvailable.isSelected());
+                exam.setDate(date.getValue());
+                exam.setTime(timePicker.getValue().toString());
+                examService.update(exam);
+                reset();
+                updateTable();
+                updateAlert(exam);
 
+            }
         }
     }
 
     @FXML
     void toAssignments(ActionEvent event) {
-
+        stageManager.switchScene(FxmlView.TEACHER_ASSIGNMENTS);
     }
 
     @FXML
     void toHome(ActionEvent event) {
-
+        stageManager.switchScene(FxmlView.TEACHER_MAIN);
     }
 
     @FXML
     void toSubjects(ActionEvent event) {
+        stageManager.switchScene(FxmlView.TEACHER_SUBJECTS);
+    }
 
+    private void deleteAlert(Exam e) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful delete");
+        alert.setHeaderText(null);
+        alert.setContentText("The exam with the id   " + e.getId() +" was deleted successfully");
+        alert.showAndWait();
+    }
+
+    private void saveAlert(Exam e){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful save");
+        alert.setHeaderText(null);
+        alert.setContentText("The exam with the id  "+ e.getId() +" has been created.");
+        alert.showAndWait();
+    }
+
+    private void updateAlert(Exam e){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful update");
+        alert.setHeaderText(null);
+        alert.setContentText("The exam with the id  "+ e.getId() +" has been updated.");
+        alert.showAndWait();
     }
 
     private void reset() {

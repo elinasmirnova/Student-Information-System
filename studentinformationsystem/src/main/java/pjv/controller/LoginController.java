@@ -2,10 +2,7 @@ package pjv.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -48,16 +45,15 @@ public class LoginController implements Initializable {
       btnLogin.setOnAction(event -> {
           if (service.authenticate(username.getText(), password.getText())) {
               authorizationLogin = username.getText();
-              switch (service.checkRole(username.getText())) {
-                  case "admin":
-                      stageManager.switchScene(FxmlView.ADMIN_MAIN);
-                      break;
-                  case "teacher":
-                      stageManager.switchScene(FxmlView.TEACHER_MAIN);
-                      break;
-                  case "student":
-                      stageManager.switchScene(FxmlView.STUDENT_MAIN);
-                      break;
+              String role = service.checkRole(username.getText());
+              if (role.equals("admin")) {
+                  stageManager.switchScene(FxmlView.ADMIN_MAIN);
+              } else if (role.equals("teacher")) {
+                  stageManager.switchScene(FxmlView.TEACHER_MAIN);
+              } else if (role.equals("student")) {
+                  stageManager.switchScene(FxmlView.STUDENT_MAIN);
+              } else {
+                  validationAlert();
               }
 
           }
@@ -68,6 +64,14 @@ public class LoginController implements Initializable {
 //              stageManager.switchScene(FxmlView.STUDENT_MAIN);
 //          }
       });
+    }
+
+    private void validationAlert(){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Validation Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Bad credentials");
+        alert.showAndWait();
     }
 
     public String getAuthorizationLogin() {

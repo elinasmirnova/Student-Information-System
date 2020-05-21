@@ -1,6 +1,7 @@
 package pjv.controller.admin;
 
 
+import com.jfoenix.controls.*;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -15,10 +16,12 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import pjv.config.StageManager;
 import pjv.controller.Validation;
+import pjv.model.Student;
 import pjv.model.Subject;
 import pjv.model.Teacher;
 import pjv.service.SubjectService;
 import pjv.service.TeacherService;
+import pjv.view.FxmlView;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,43 +38,34 @@ public class AdminSubjectsController implements Initializable {
     private Label subjectId;
 
     @FXML
-    private TextField code;
+    private JFXTextField code;
 
     @FXML
-    private TextField name;
+    private JFXTextField name;
 
     @FXML
-    private RadioButton rbSummer;
+    private JFXRadioButton rbSummer;
 
     @FXML
-    private ToggleGroup gender;
+    private JFXRadioButton rbWinter;
 
     @FXML
-    private RadioButton rbWinter;
+    private JFXComboBox<Integer> credits;
 
     @FXML
-    private ComboBox<Integer> credits;
-
-    @FXML
-    private ComboBox<String> role;
+    private JFXComboBox<String> role;
 
     @FXML
     private CheckComboBox<String> teachersTest1;
 
-//    @FXML
-//    private CheckListView<String> teachersTest2;
+    @FXML
+    private JFXTextArea txtAreaSynopsis;
 
     @FXML
-    private TextArea txtAreaSynopsis;
+    private JFXButton reset;
 
     @FXML
-    private Button reset;
-
-    @FXML
-    private Button saveSubject;
-
-    @FXML
-    private Button btnLogout;
+    private JFXButton saveSubject;
 
     @FXML
     private TableView<Subject> subjectsTable;
@@ -94,12 +88,6 @@ public class AdminSubjectsController implements Initializable {
     @FXML
     private TableColumn<Subject, String> colSemester;
 
-    @FXML
-    private MenuItem viewSubject;
-
-    @FXML
-    private MenuItem deleteSubject;
-
     @Lazy
     @Autowired
     private StageManager stageManager;
@@ -110,77 +98,129 @@ public class AdminSubjectsController implements Initializable {
     @Autowired
     private TeacherService teacherService;
 
-    private Validation validation;
+    private static Validation validation = new Validation();
 
     private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
     private ObservableList<String> teachersList = FXCollections.observableArrayList();
     private ObservableList<Integer> creditsList = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 25);
     private ObservableList<String> rolesList = FXCollections.observableArrayList("(P) Compulsory", "(V) Elective", "(PV)");
 
+    @FXML
+    void toHome(ActionEvent event) {
+        stageManager.switchScene(FxmlView.ADMIN_MAIN);
+    }
+
+    @FXML
+    void toStudents(ActionEvent event) {
+        stageManager.switchScene(FxmlView.ADMIN_STUDENTS);
+    }
+
+    @FXML
+    void toTeachers(ActionEvent event) {
+        stageManager.switchScene(FxmlView.ADMIN_TEACHERS);
+    }
+
+    @FXML
+    void logout(ActionEvent event) {
+        stageManager.switchScene(FxmlView.LOGIN);
+    }
 
     @FXML
     void deleteSubject(ActionEvent event) {
         Subject subjectToDelete = subjectsTable.getSelectionModel().getSelectedItem();
         subjectService.remove(subjectToDelete);
+        reset();
         updateTable();
+        deleteAlert(subjectToDelete);
     }
 
     @FXML
-    void saveSubject(ActionEvent event) {
-//        if (validation.validate("Code", code.getText(), "([A-Za-z0-9]+\\.[A-Za-z0-9]+(\\r)?(\\n)?)") &&
-//                validation.validate("Name", name.getText(), "[a-zA-Z]+") &&
-//                validation.validate("Synopsis", txtAreaSynopsis.getText(), "([A-Za-z0-9]+\\.[A-Za-z0-9]+(\\r)?(\\n)?)") &&
-//                validation.emptyValidation("Credits", credits.getSelectionModel().getSelectedItem() == null) &&
-//                validation.emptyValidation("Role", role.getSelectionModel().getSelectedItem() == null) &&
-//                (rbSummer.isSelected() || rbWinter.isSelected())) {
+    void save(ActionEvent event) {
+        if (validation.validate("Code", code.getText(), "[a-zA-Z0-9]+") &&
+                validation.validate("Name", name.getText(), "[a-zA-Z]+") &&
+              //  validation.validate("Synopsis", txtAreaSynopsis.getText(), "([A-Za-z0-9]+\\.[A-Za-z0-9]+(\\r)?(\\n)?)") &&
+                validation.emptyValidation("Credits", credits.getSelectionModel().getSelectedItem() == null) &&
+                validation.emptyValidation("Role", role.getSelectionModel().getSelectedItem() == null) &&
+                (rbSummer.isSelected()) || rbWinter.isSelected() ) {
 
-        if (subjectId.getText().equals("") || subjectId.getText() == null) {
-            Subject subject = new Subject();
-            subject.setCode(code.getText());
-            subject.setName(name.getText());
-            subject.setCredits(credits.getValue());
-            subject.setRole(role.getValue());
-            subject.setSemester( rbSummer.isSelected() ? "Summer" : "Winter" );
-            subject.setSynopsis(txtAreaSynopsis.getText());
-            List<Teacher> checkedTeachers = getCheckedTeachers();
-            subject.setTeachers(checkedTeachers);
-            subjectService.persist(subject);
-            // setSubjectToTeachers(checkedTeachers, subject);
-            updateTable();
-            reset();
-        } else {
-            Subject subject = subjectService.find(Integer.parseInt(subjectId.getText()));
-            subject.setCode(code.getText());
-            subject.setName(name.getText());
-            subject.setCredits(credits.getValue());
-            subject.setRole(role.getValue());
-            subject.setSemester( rbSummer.isSelected() ? "Summer" : "Winter" );
-            subject.setSynopsis(txtAreaSynopsis.getText());
-            List<Teacher> checkedTeachers = getCheckedTeachers();
-            subject.setTeachers(checkedTeachers);
-            subjectService.update(subject);
+            if (subjectId.getText().equals("") || subjectId.getText() == null) {
+                //if (subjectService.ifExists(code.getText())) {
+                    Subject subject = new Subject();
+                    subject.setCode(code.getText());
+                    subject.setName(name.getText());
+                    subject.setCredits(credits.getValue());
+                    subject.setRole(role.getValue());
+                    subject.setSemester(rbSummer.isSelected() ? "Summer" : "Winter");
+                    subject.setSynopsis(txtAreaSynopsis.getText());
+                    List<Teacher> checkedTeachers = getCheckedTeachers();
+                    subject.setTeachers(checkedTeachers);
+                    subjectService.persist(subject);
+                    // setSubjectToTeachers(checkedTeachers, subject);
+                    updateTable();
+                    reset();
+                    saveAlert(subject);
+//                } else {
+//                    subjectAlreadyExists();
+//                }
+            } else {
+                Subject subject = subjectService.find(Integer.parseInt(subjectId.getText()));
+                subject.setCode(code.getText());
+                subject.setName(name.getText());
+                subject.setCredits(credits.getValue());
+                subject.setRole(role.getValue());
+                subject.setSemester(rbSummer.isSelected() ? "Summer" : "Winter");
+                subject.setSynopsis(txtAreaSynopsis.getText());
+                List<Teacher> checkedTeachers = getCheckedTeachers();
+                subject.setTeachers(checkedTeachers);
+                subjectService.update(subject);
 
-            updateTable();
-            reset();
+                updateTable();
+                reset();
+                updateAlert(subject);
+
+            }
 
         }
 
-
-
         }
-    //}
 
+    private void subjectAlreadyExists() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Validation Error");
+        alert.setHeaderText(null);
+        alert.setContentText("Subject with this code already exists. Please use a different code");
+    }
+
+    private void deleteAlert(Subject subject) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful delete");
+        alert.setHeaderText(null);
+        alert.setContentText("The subject with the code  " + subject.getCode() +" was deleted successfully");
+        alert.showAndWait();
+    }
+
+    private void saveAlert(Subject subject){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful save");
+        alert.setHeaderText(null);
+        alert.setContentText("The subject with the code "+ subject.getCode() +" has been created.");
+        alert.showAndWait();
+    }
+
+
+    private void updateAlert(Subject subject){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful update");
+        alert.setHeaderText(null);
+        alert.setContentText("The subject with the code  "+ subject.getCode() +" has been updated.");
+        alert.showAndWait();
+    }
 
     public void setSubjectToTeachers(List<Teacher> teachers, Subject subject) {
         for (Teacher teacher : teachers) {
             teacher.addSubject(subject);
             teacherService.update(teacher);
         }
-
-    }
-
-    @FXML
-    void viewMoreAboutSubject(ActionEvent event) {
 
     }
 
@@ -251,6 +291,7 @@ public class AdminSubjectsController implements Initializable {
     }
 
     public void fillTextFields() {
+        reset();
         mainLabel.setText("Edit subject");
         saveSubject.setText("Edit");
         Subject subject = subjectsTable.getSelectionModel().getSelectedItem();

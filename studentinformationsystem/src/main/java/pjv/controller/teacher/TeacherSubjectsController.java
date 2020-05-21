@@ -1,5 +1,7 @@
 package pjv.controller.teacher;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -33,6 +35,7 @@ import pjv.model.Teacher;
 import pjv.service.EnrolledStudentService;
 import pjv.service.SubjectService;
 import pjv.service.TeacherService;
+import pjv.view.FxmlView;
 
 import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
@@ -52,7 +55,7 @@ public class TeacherSubjectsController implements Initializable {
     private Label subjectId;
 
     @FXML
-    private TextField code;
+    private JFXTextField code;
 
     @FXML
     private TableView<EnrolledStudent> studentsTable;
@@ -76,13 +79,10 @@ public class TeacherSubjectsController implements Initializable {
     private MenuItem viewStudent;
 
     @FXML
-    private Button reset;
+    private JFXButton reset;
 
     @FXML
-    private Button editStudentsList;
-
-    @FXML
-    private Button btnLogout;
+    private JFXButton editStudentsList;
 
     @FXML
     private TableView<Subject> subjectsTable;
@@ -132,6 +132,26 @@ public class TeacherSubjectsController implements Initializable {
     @FXML
     void deleteSubject(ActionEvent event) {
 
+    }
+
+    @FXML
+    void logout(ActionEvent event) {
+        stageManager.switchScene(FxmlView.LOGIN);
+    }
+
+    @FXML
+    void toAssignments(ActionEvent event) {
+        stageManager.switchScene(FxmlView.TEACHER_ASSIGNMENTS);
+    }
+
+    @FXML
+    void toExams(ActionEvent event) {
+        stageManager.switchScene(FxmlView.TEACHER_EXAMS);
+    }
+
+    @FXML
+    void toHome(ActionEvent event) {
+        stageManager.switchScene(FxmlView.TEACHER_MAIN);
     }
 
     @FXML
@@ -216,7 +236,6 @@ public class TeacherSubjectsController implements Initializable {
         code.clear();
         studentsTable.getItems().clear();
     }
-
 
 
     @Override

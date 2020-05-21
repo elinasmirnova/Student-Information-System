@@ -1,6 +1,6 @@
 package pjv.controller.teacher;
 
-import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.*;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import pjv.config.StageManager;
 import pjv.controller.LoginController;
+import pjv.controller.Validation;
 import pjv.model.Assignment;
 import pjv.model.Exam;
 import pjv.model.Subject;
@@ -34,40 +35,29 @@ import java.util.ResourceBundle;
 public class TeacherAssignmentsController implements Initializable {
 
     @FXML
-    private MenuItem homeMenuItem;
-
-    @FXML
-    private MenuItem subjectsMenuItem;
-
-    @FXML
-    private MenuItem examsMenuItem;
-
-    @FXML
     private Label label;
 
     @FXML
     private Label assignmentId;
 
     @FXML
-    private ComboBox<String> subjectCode;
+    private JFXComboBox<String> subjectCode;
 
     @FXML
-    private TextField title;
+    private JFXTextField title;
 
     @FXML
-    private DatePicker deadline;
+    private JFXDatePicker deadline;
 
     @FXML
     private JFXTextArea txtAreaDescription;
 
     @FXML
-    private Button reset;
+    private JFXButton reset;
 
     @FXML
-    private Button save;
+    private JFXButton save;
 
-    @FXML
-    private Button btnLogout;
 
     @FXML
     private TableView<Assignment> assignmentsTable;
@@ -102,6 +92,7 @@ public class TeacherAssignmentsController implements Initializable {
     @Autowired
     private SubjectService subjectService;
 
+    private static Validation validation = new Validation();
 
     private ObservableList<Assignment> assignmentsList = FXCollections.observableArrayList();
     private ObservableList<String> subjectCodes = FXCollections.observableArrayList();
@@ -113,39 +104,56 @@ public class TeacherAssignmentsController implements Initializable {
         assignmentService.remove(assignment);
         reset();
         updateTable();
+        deleteAlert(assignment);
+
     }
 
     @FXML
     void save(ActionEvent event) {
-        if (assignmentId.getText().equals("") || assignmentId.getText() == null) {
-            Assignment assignment = new Assignment();
+        if (validation.validate("Title", title.getText(), "[a-zA-Z]+") &&
+                validation.emptyValidation("Description", txtAreaDescription.getText().isEmpty()) &&
+                validation.emptyValidation("Deadline", deadline.getEditor().getText().isEmpty()) &&
+                validation.emptyValidation("Subject code", subjectCode.getSelectionModel().getSelectedItem() == null)) {
 
-            assignment.setName(title.getText());
-            assignment.setDeadline(deadline.getValue());
-            assignment.setDescription(txtAreaDescription.getText());
-            assignment.setSubject(subjectService.findSubjectByCode(subjectCode.getValue()));
-            assignment.setTeacher(teacher);
+            if (assignmentId.getText().equals("") || assignmentId.getText() == null) {
+                Assignment assignment = new Assignment();
 
-            assignmentService.persist(assignment);
+                assignment.setName(title.getText());
+                assignment.setDeadline(deadline.getValue());
+                assignment.setDescription(txtAreaDescription.getText());
+                assignment.setSubject(subjectService.findSubjectByCode(subjectCode.getValue()));
+                assignment.setTeacher(teacher);
 
-            updateTable();
+                assignmentService.persist(assignment);
+
+                updateTable();
+                reset();
+                saveAlert(assignment);
 
 
-        } else {
-            Assignment existingAssignment = assignmentService.find(Integer.parseInt(assignmentId.getText()));
+            } else {
+                Assignment existingAssignment = assignmentService.find(Integer.parseInt(assignmentId.getText()));
 
-            existingAssignment.setName(title.getText());
-            existingAssignment.setDeadline(deadline.getValue());
-            existingAssignment.setDescription(txtAreaDescription.getText());
-            existingAssignment.setSubject(subjectService.findSubjectByCode(subjectCode.getValue()));
+                existingAssignment.setName(title.getText());
+                existingAssignment.setDeadline(deadline.getValue());
+                existingAssignment.setDescription(txtAreaDescription.getText());
+                existingAssignment.setSubject(subjectService.findSubjectByCode(subjectCode.getValue()));
 
-            assignmentService.update(existingAssignment);
+                assignmentService.update(existingAssignment);
 
-            updateTable();
+                updateTable();
+                reset();
+                updateAlert(existingAssignment);
+
+            }
 
         }
     }
 
+    @FXML
+    void logout(ActionEvent event) {
+        stageManager.switchScene(FxmlView.LOGIN);
+    }
 
     @FXML
     void toExams(ActionEvent event) {
@@ -160,6 +168,31 @@ public class TeacherAssignmentsController implements Initializable {
     @FXML
     void toSubjects(ActionEvent event) {
         stageManager.switchScene(FxmlView.TEACHER_SUBJECTS);
+    }
+
+    private void deleteAlert(Assignment a) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful delete");
+        alert.setHeaderText(null);
+        alert.setContentText("The assignment with the id   " + a.getId() +" was deleted successfully");
+        alert.showAndWait();
+    }
+
+    private void saveAlert(Assignment a){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful save");
+        alert.setHeaderText(null);
+        alert.setContentText("The assignment with the id  "+ a.getId() +" has been created.");
+        alert.showAndWait();
+    }
+
+
+    private void updateAlert(Assignment a){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful update");
+        alert.setHeaderText(null);
+        alert.setContentText("The assignment with the id  "+ a.getId() +" has been updated.");
+        alert.showAndWait();
     }
 
     private void reset() {
@@ -230,6 +263,5 @@ public class TeacherAssignmentsController implements Initializable {
         });
 
         reset.setOnAction(event -> reset());
-        btnLogout.setOnAction(event -> stageManager.switchScene(FxmlView.LOGIN));
     }
 }

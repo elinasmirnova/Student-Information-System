@@ -30,6 +30,11 @@ public class AdminMainController implements Initializable {
     @Autowired
     private StageManager stageManager;
 
+    @FXML
+    void logout(ActionEvent event) {
+        stageManager.switchScene(FxmlView.LOGIN);
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -52,4 +52,9 @@ public class SubjectService {
     public Subject findSubjectByCode(String code) {
         return subjectDao.findSubjectByCode(code);
     }
+
+    @Transactional
+    public boolean ifExists(String code) {
+        return subjectDao.findSubjectByCode(code) == null;
+    }
 }

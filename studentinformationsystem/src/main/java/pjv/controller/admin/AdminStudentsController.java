@@ -89,7 +89,7 @@ public class AdminStudentsController implements Initializable {
     @Autowired
     private UserService userService;
 
-    private Validation validation;
+    private static Validation validation = new Validation();
 
     private ObservableList<Student> userList = FXCollections.observableArrayList();
     private ObservableList<Integer> years = FXCollections.observableArrayList(1, 2, 3, 4, 5, 6);
@@ -144,35 +144,43 @@ public class AdminStudentsController implements Initializable {
     @FXML
     void save(ActionEvent event) {
 
-//        if (validation.validate("First Name", firstName.getText(), "[a-zA-Z]+") &&
-//                validation.validate("Last Name", lastName.getText(), "[a-zA-Z]+") &&
-//                validation.emptyValidation("DOB", dob.getEditor().getText().isEmpty()) &&
-//                validation.emptyValidation("Year", year.getSelectionModel().getSelectedItem() == null) &&
-//                validation.emptyValidation("Study program", studyProgram.getSelectionModel().getSelectedItem() == null)) {
+        if (validation.validate("First Name", firstName.getText(), "[a-zA-Z]+") &&
+                validation.validate("Last Name", lastName.getText(), "[a-zA-Z]+") &&
+                validation.emptyValidation("Date of Birth", dob.getEditor().getText().isEmpty()) &&
+                validation.emptyValidation("Year", year.getSelectionModel().getSelectedItem() == null) &&
+                validation.emptyValidation("Study program", studyProgram.getSelectionModel().getSelectedItem() == null)) {
 
             if (userId.getText() == null || userId.getText().equals("")) {
 //                if(validate("Email", getEmail(), "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+") &&
 //                        emptyValidation("Password", getPassword().isEmpty())){
 
-//                if (validation.emptyValidation("Password", password.getText().isEmpty())) {
-                Student student = new Student();
-                student.setFirstName(firstName.getText());
-                User user = new User();
-                user.setRole("student");
-                user.setUsername(username.getText());
-                user.setPassword(password.getText());
-                userService.persist(user);
+                if (validation.emptyValidation("Password", password.getText().isEmpty())
+                    && validation.validate("Username", username.getText(), "[a-zA-Z0-9]+")) {
+                     if (!userService.ifExists(username.getText())) {
 
-                student.setUser(user);
-                student.setLastName(lastName.getText());
-                student.setDateOfBirth(dob.getValue());
-                student.setStudyProgram(studyProgram.getValue());
-                student.setYear(year.getValue());
-                studentService.persist(student);
-                reset(); //TODO: pridat alert
+                         Student student = new Student();
+                         student.setFirstName(firstName.getText());
+                         User user = new User();
+                         user.setRole("student");
+                         user.setUsername(username.getText());
+                         user.setPassword(password.getText());
+                         userService.persist(user);
 
-                updateTable();
+                         student.setUser(user);
+                         student.setLastName(lastName.getText());
+                         student.setDateOfBirth(dob.getValue());
+                         student.setStudyProgram(studyProgram.getValue());
+                         student.setYear(year.getValue());
+                         studentService.persist(student);
+                         reset();
 
+                         updateTable();
+                         saveAlert(student);
+                     } else {
+                         usernameAlreadyExists();
+                     }
+
+                }
 
             } else {
 
@@ -184,29 +192,48 @@ public class AdminStudentsController implements Initializable {
                 student.setStudyProgram(studyProgram.getValue());
                 student.setYear(year.getValue());
                 studentService.update(student);
-                reset(); //TODO: pridat alert
+                reset();
 
                 updateTable();
+                updateAlert(student);
 
             }
 
         }
+    }
 
 
-        private void deleteAlert(Student student) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Successful delete");
-            alert.setHeaderText(null);
-            alert.setContentText("The student with the id  " + student.getId() +" was deleted successfully");
-            alert.showAndWait();
-        }
+    private void deleteAlert(Student student) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful delete");
+        alert.setHeaderText(null);
+        alert.setContentText("The student with the id  " + student.getId() +" was deleted successfully");
+        alert.showAndWait();
+    }
 
-   // }
-//    private void validateFields() {
-//        RequiredFieldValidator validator = new RequiredFieldValidator();
-//        validator.setMessage("Input required");
-//        username
-//    }
+    private void saveAlert(Student student){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful save");
+        alert.setHeaderText(null);
+        alert.setContentText("The student with the id  "+ student.getId() +" has been created.");
+        alert.showAndWait();
+    }
+
+    private void updateAlert(Student student){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Successful update");
+        alert.setHeaderText(null);
+        alert.setContentText("The student with the id  "+ student.getId() +" has been updated.");
+        alert.showAndWait();
+    }
+
+    private void usernameAlreadyExists() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Validation Error");
+        alert.setHeaderText(null);
+        alert.setContentText("User with this username already exists. Please use a different username");
+    }
+
 
     private void loadUserDetails() {
         userList.clear();

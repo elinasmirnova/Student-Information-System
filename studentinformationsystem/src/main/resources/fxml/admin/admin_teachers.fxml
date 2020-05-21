@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ContextMenu?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -24,9 +25,9 @@
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem fx:id="homeMenuItem" mnemonicParsing="false" onAction="#toHome" text="Home" />
-                        <MenuItem fx:id="studentsMenuItem" mnemonicParsing="false" onAction="#toStudents" text="Students" />
-                        <MenuItem fx:id="subjectsMenuItem" mnemonicParsing="false" onAction="#toSubjects" text="Subjects" />
+                        <MenuItem mnemonicParsing="false" onAction="#toHome" text="Home" />
+                        <MenuItem mnemonicParsing="false" onAction="#toStudents" text="Students" />
+                        <MenuItem mnemonicParsing="false" onAction="#toSubjects" text="Subjects" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
@@ -43,11 +44,11 @@
         </MenuBar>
     </top>
     <left>
-        <VBox prefHeight="571.0" prefWidth="306.0" spacing="10.0" style="-fx-background-color: #FFEA90;" styleClass="background" BorderPane.alignment="CENTER">
+        <VBox prefHeight="571.0" prefWidth="306.0" spacing="10.0" style="-fx-background-color: #ffca28;" styleClass="background" BorderPane.alignment="CENTER">
             <children>
                 <Label text="Add New Teacher" textFill="WHITE">
                     <font>
-                        <Font size="20.0" />
+                        <Font name="Hiragino Sans W1" size="20.0" />
                     </font>
                     <VBox.margin>
                         <Insets bottom="10.0" left="20.0" top="30.0" />
@@ -57,70 +58,78 @@
                     <children>
                         <Label text="User ID - " textFill="#f8f7f7">
                             <font>
-                                <Font size="15.0" />
+                                <Font name="Hiragino Sans W1" size="15.0" />
                             </font>
                         </Label>
-                        <Label fx:id="userId">
+                        <Label fx:id="userId" textFill="WHITE">
                             <HBox.margin>
                                 <Insets left="25.0" />
                             </HBox.margin>
+                     <font>
+                        <Font name="Hiragino Sans W1" size="15.0" />
+                     </font>
                         </Label>
                     </children>
                     <VBox.margin>
                         <Insets left="25.0" />
                     </VBox.margin>
                 </HBox>
-                <TextField fx:id="username" layoutX="40.0" layoutY="131.0" prefHeight="30.0" prefWidth="246.0" promptText="Username">
-                    <VBox.margin>
-                        <Insets left="25.0" right="25.0" />
-                    </VBox.margin>
-                </TextField>
-                <TextField fx:id="firstName" prefHeight="30.0" prefWidth="246.0" promptText="First Name">
-                    <VBox.margin>
-                        <Insets left="25.0" right="25.0" />
-                    </VBox.margin></TextField>
-                <TextField fx:id="lastName" prefHeight="30.0" prefWidth="246.0" promptText="Last Name">
-                    <VBox.margin>
-                        <Insets left="25.0" right="25.0" />
-                    </VBox.margin></TextField>
-                <ComboBox fx:id="degree" layoutX="40.0" layoutY="291.0" prefHeight="30.0" prefWidth="246.0" promptText="Degree">
-                    <VBox.margin>
-                        <Insets left="25.0" />
-                    </VBox.margin>
-                </ComboBox>
-            <ComboBox fx:id="department" layoutX="40.0" layoutY="251.0" prefHeight="30.0" prefWidth="246.0" promptText="Department">
+            <JFXTextField fx:id="username" focusColor="#4527a0" promptText="Username" unFocusColor="BLACK">
                <VBox.margin>
-                  <Insets left="25.0" />
+                  <Insets left="15.0" right="15.0" />
                </VBox.margin>
-            </ComboBox>
-                <PasswordField fx:id="password" prefHeight="30.0" prefWidth="246.0" promptText="Password">
-                    <VBox.margin>
-                        <Insets left="25.0" right="25.0" />
-                    </VBox.margin>
-                </PasswordField>
-                <HBox prefHeight="30.0" prefWidth="250.0" spacing="10.0">
-                    <children>
-                        <Button fx:id="reset" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" style="-fx-background-color: white;" text="Reset">
-                            <effect>
-                                <DropShadow blurType="ONE_PASS_BOX" color="#1965d0" />
-                            </effect>
-                        </Button>
-                        <Button fx:id="saveUser" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#save" prefHeight="30.0" prefWidth="75.0" styleClass="btnGreen" text="Save" textFill="WHITE">
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                            <effect>
-                                <DropShadow blurType="ONE_PASS_BOX" color="#6468b2" />
-                            </effect>
-                        </Button>
-                    </children>
-                    <opaqueInsets>
+            </JFXTextField>
+            <JFXTextField fx:id="firstName" focusColor="#4527a0" promptText="First Name" unFocusColor="BLACK">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXTextField fx:id="lastName" focusColor="#4527a0" promptText="Last Name" unFocusColor="BLACK">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <JFXComboBox fx:id="degree" focusColor="#4527a0" prefHeight="27.0" prefWidth="282.0" promptText="Degree" unFocusColor="BLACK">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </JFXComboBox>
+            <JFXComboBox fx:id="department" focusColor="#4527a0" prefHeight="27.0" prefWidth="281.0" promptText="Department" unFocusColor="BLACK">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </JFXComboBox>
+            <JFXPasswordField fx:id="password" focusColor="#4527a0" promptText="Password" unFocusColor="BLACK">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </JFXPasswordField>
+            <HBox prefHeight="30.0" prefWidth="250.0" spacing="10.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <children>
+                  <JFXButton fx:id="reset" buttonType="RAISED" ripplerFill="WHITE" style="-fx-background-color: #4527a0;" text="Reset" textFill="WHITE" textOverrun="CLIP">
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" minHeight="-Infinity" minWidth="-Infinity" onAction="#save" prefHeight="27.0" prefWidth="53.0" style="-fx-background-color: #ffebee;" text="Save" textOverrun="CLIP">
+                     <opaqueInsets>
                         <Insets />
-                    </opaqueInsets>
-                    <VBox.margin>
-                        <Insets left="110.0" />
-                    </VBox.margin>
-                </HBox>
+                     </opaqueInsets>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets left="120.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
             </children>
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -135,7 +144,7 @@
             <children>
                 <HBox alignment="TOP_RIGHT" prefHeight="41.0" prefWidth="640.0">
                     <children>
-                        <Button fx:id="btnLogout" mnemonicParsing="false" prefHeight="22.0" prefWidth="70.0" style="-fx-background-color: #FFEA90;" styleClass="background" text="Logout" textFill="#fff9f9" textOverrun="CLIP">
+                        <Button mnemonicParsing="false" onAction="#logout" prefHeight="22.0" prefWidth="70.0" style="-fx-background-color: #ffca28;" styleClass="background" text="Logout" textFill="#fff9f9" textOverrun="CLIP">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -166,7 +175,7 @@
                     <contextMenu>
                         <ContextMenu>
                             <items>
-                                <MenuItem fx:id="deleteUsers" mnemonicParsing="false" onAction="#deleteUser" text="Delete" />
+                                <MenuItem mnemonicParsing="false" onAction="#deleteUser" text="Delete" />
                             </items>
                         </ContextMenu>
                     </contextMenu>
