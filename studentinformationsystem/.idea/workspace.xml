@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417f07e1-12b2-416a-a644-9a9e959baf1a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b3c3962c-4d92-4407-9b5b-268fe0bf5768.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b3c3962c-4d92-4407-9b5b-268fe0bf5768.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentExamsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentExamsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeachersSubjectsSecondController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeachersSubjectsSecondController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentExamsController$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentExamsController$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentExamsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentExamsController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentExamsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentExamsController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +136,7 @@
       <recent name="pjv.config" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in studentinformationsystem (1)">
+  <component name="RunManager" selected="JUnit.All in studentinformationsystem">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pjv.Main" />
       <module name="studentinformationsystem2" />
@@ -147,6 +151,14 @@
       </method>
     </configuration>
     <configuration name="All in studentinformationsystem (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="studentinformationsystem" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in studentinformationsystem" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="studentinformationsystem" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -185,22 +197,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ExamDaoTest.testFindAllExams" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="studentinformationsystem" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="pjv.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="pjv.dao" />
-      <option name="MAIN_CLASS_NAME" value="pjv.dao.ExamDaoTest" />
-      <option name="METHOD_NAME" value="testFindAllExams" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="studentinformationsystem" />
       <extension name="coverage">
@@ -232,11 +228,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in studentinformationsystem (1)" />
+        <item itemvalue="JUnit.All in studentinformationsystem" />
         <item itemvalue="JUnit.DaoTest" />
+        <item itemvalue="JUnit.All in studentinformationsystem (1)" />
         <item itemvalue="JUnit.DaoTest.testRepositoriesInApplicationContext" />
         <item itemvalue="JUnit.UserServiceTest" />
-        <item itemvalue="JUnit.ExamDaoTest.testFindAllExams" />
       </list>
     </recent_temporary>
   </component>
@@ -277,7 +273,7 @@
       <workItem from="1589973353476" duration="2585000" />
       <workItem from="1590007260799" duration="10000" />
       <workItem from="1590007298286" duration="49528000" />
-      <workItem from="1590146312057" duration="760000" />
+      <workItem from="1590146312057" duration="2695000" />
     </task>
     <task id="LOCAL-00001" summary="GUI (material ui) updated">
       <created>1590055161919</created>
@@ -314,7 +310,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590136564770</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Error with test passing fixed">
+      <created>1590147895268</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1590147895268</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,7 +330,8 @@
     <MESSAGE value="Tests updated" />
     <MESSAGE value="Skoro done" />
     <MESSAGE value="Done (???)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done (???)" />
+    <MESSAGE value="Error with test passing fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Error with test passing fixed" />
   </component>
   <component name="WindowStateProjectService">
     <state x="403" y="73" key="#Assign_Data_Sources" timestamp="1590085190331">
@@ -335,11 +339,11 @@
     </state>
     <state x="403" y="73" key="#Assign_Data_Sources/0.0.1440.900@0.0.1440.900" timestamp="1590085190331" />
     <state x="403" y="90" key="#Assign_Data_Sources/0.23.1440.829@0.23.1440.829" timestamp="1589708307080" />
-    <state x="346" y="23" key="#Main" timestamp="1590147684867">
+    <state x="346" y="23" key="#Main" timestamp="1590154902115">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="346" y="23" key="#Main/0.0.1440.900@0.0.1440.900" timestamp="1590146421767" />
-    <state x="346" y="23" key="#Main/0.23.1440.829@0.23.1440.829" timestamp="1590147684867" />
+    <state x="346" y="23" key="#Main/0.23.1440.829@0.23.1440.829" timestamp="1590154902115" />
     <state x="332" y="111" key="#Project_Structure" timestamp="1588530661853">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
@@ -377,31 +381,31 @@
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="455" y="289" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1440.829@0.23.1440.829" timestamp="1588681363150" />
-    <state x="189" y="23" width="1074" height="829" key="CommitChangelistDialog2" timestamp="1590136564015">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="189" y="23" width="1074" height="829" key="CommitChangelistDialog2" timestamp="1590147894333">
+      <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="189" y="23" width="1074" height="829" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1590136564015" />
-    <state x="189" y="23" key="CommitChangelistDialog2/0.23.1440.829@0.23.1440.829" timestamp="1590007639165" />
-    <state width="1398" height="440" key="GridCell.Tab.0.bottom" timestamp="1590147866415">
+    <state x="189" y="23" key="CommitChangelistDialog2/0.23.1440.829@0.23.1440.829" timestamp="1590147894333" />
+    <state width="1398" height="540" key="GridCell.Tab.0.bottom" timestamp="1590155051537">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state width="1398" height="166" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1590136680632" />
-    <state width="1398" height="440" key="GridCell.Tab.0.bottom/0.23.1440.829@0.23.1440.829" timestamp="1590147866415" />
-    <state width="1398" height="440" key="GridCell.Tab.0.center" timestamp="1590147866415">
+    <state width="1398" height="540" key="GridCell.Tab.0.bottom/0.23.1440.829@0.23.1440.829" timestamp="1590155051537" />
+    <state width="1398" height="540" key="GridCell.Tab.0.center" timestamp="1590155051536">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state width="1398" height="166" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1590136680632" />
-    <state width="1398" height="440" key="GridCell.Tab.0.center/0.23.1440.829@0.23.1440.829" timestamp="1590147866415" />
-    <state width="1398" height="440" key="GridCell.Tab.0.left" timestamp="1590147866414">
+    <state width="1398" height="540" key="GridCell.Tab.0.center/0.23.1440.829@0.23.1440.829" timestamp="1590155051536" />
+    <state width="1398" height="540" key="GridCell.Tab.0.left" timestamp="1590155051535">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state width="1398" height="166" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1590136680631" />
-    <state width="1398" height="440" key="GridCell.Tab.0.left/0.23.1440.829@0.23.1440.829" timestamp="1590147866414" />
-    <state width="1398" height="440" key="GridCell.Tab.0.right" timestamp="1590147866415">
+    <state width="1398" height="540" key="GridCell.Tab.0.left/0.23.1440.829@0.23.1440.829" timestamp="1590155051535" />
+    <state width="1398" height="540" key="GridCell.Tab.0.right" timestamp="1590155051536">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state width="1398" height="166" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1590136680632" />
-    <state width="1398" height="440" key="GridCell.Tab.0.right/0.23.1440.829@0.23.1440.829" timestamp="1590147866415" />
+    <state width="1398" height="540" key="GridCell.Tab.0.right/0.23.1440.829@0.23.1440.829" timestamp="1590155051536" />
     <state width="1398" height="39" key="GridCell.Tab.1.bottom" timestamp="1590136680624">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -430,10 +434,11 @@
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="208" y="23" width="1024" height="829" key="SettingsEditor/0.23.1440.829@0.23.1440.829" timestamp="1585768106544" />
-    <state x="320" y="186" key="Vcs.Push.Dialog.v2" timestamp="1590136575128">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="320" y="194" key="Vcs.Push.Dialog.v2" timestamp="1590147903718">
+      <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="320" y="186" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1590136575128" />
+    <state x="320" y="194" key="Vcs.Push.Dialog.v2/0.23.1440.829@0.23.1440.829" timestamp="1590147903717" />
     <state x="528" y="224" key="chooseDestDirectoryDialog" timestamp="1588587673716">
       <screen x="0" y="23" width="1440" height="829" />
     </state>

@@ -105,14 +105,15 @@ public class StudentExamsController implements Initializable {
             String subjectCode = comboBox.getSelectionModel().getSelectedItem();
             examsList.addAll(examService.findAvailableToEnrollExamsBySubject(subjectCode));
             List<Exam> studentsExams = student.getExams();
-            System.out.println(student.getExams());
-            System.out.println(examsList);
+//            System.out.println(student.getExams());
+//            System.out.println(examsList);
             for (Exam e: studentsExams) {
                 examsList.remove(e);
             }
             examsTable.setItems(examsList);
         }
     }
+
 
     @FXML
     void toAssignments(ActionEvent event) {
@@ -169,6 +170,11 @@ public class StudentExamsController implements Initializable {
                                             exam.addStudent(student);
                                             examService.update(exam);
                                             studentService.update(student);
+                                            String subjectCode = comboBox.getSelectionModel().getSelectedItem();
+                                            examsList.clear();
+                                            examsList.addAll(examService.findAvailableToEnrollExamsBySubject(subjectCode));
+                                            examsTable.setItems(examsList);
+
                                             btn.setText("Withdraw");
                                         } else {
                                             Exam exam = examsTable.getSelectionModel().getSelectedItem();

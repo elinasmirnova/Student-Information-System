@@ -137,7 +137,13 @@ public class TeachersSubjectsSecondController  implements Initializable {
                 newStudent.setSubject(list2.get(0).getSubject());
                 enrolledStudentService = Main.context.getBean(EnrolledStudentService.class);
                 enrolledStudentService.persist(newStudent);
-                updateTables();
+                list2.add(newStudent);
+                table2.setItems(list2);
+                fillTable1();
+                TeacherSubjectsController.studentsList.add(newStudent);
+
+
+                //updateTables();
             }
         });
 
@@ -156,7 +162,11 @@ public class TeachersSubjectsSecondController  implements Initializable {
 //                subjectService.update(list2.get(0).getSubject());
                 enrolledStudentService = Main.context.getBean(EnrolledStudentService.class);
                 enrolledStudentService.remove(potential);
-                updateTables();
+                table1.setItems(list1);
+                list2.remove(potential);
+                TeacherSubjectsController.studentsList.remove(potential);
+                table2.setItems(list2);
+
             }
         });
     }
