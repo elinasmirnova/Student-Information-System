@@ -84,7 +84,6 @@ public class StudentExamsController implements Initializable {
 
     private ObservableList<Exam> examsList = FXCollections.observableArrayList();
     private ObservableList<String> subjectCodesList = FXCollections.observableArrayList();
-    final TableCell<Exam, String> cell = new TableCell<Exam, String>();
 
 
     @FXML
