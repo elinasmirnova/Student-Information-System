@@ -23,16 +23,11 @@
     <top>
         <MenuBar BorderPane.alignment="TOP_LEFT">
             <menus>
-                <Menu mnemonicParsing="false" text="File">
+                <Menu mnemonicParsing="false" text="Navigation">
                     <items>
                         <MenuItem mnemonicParsing="false" onAction="#toHome" text="Home" />
                         <MenuItem mnemonicParsing="false" onAction="#toStudents" text="Students" />
                         <MenuItem mnemonicParsing="false" onAction="#toSubjects" text="Subjects" />
-                    </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Delete" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

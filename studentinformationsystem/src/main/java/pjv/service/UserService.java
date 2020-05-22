@@ -84,7 +84,7 @@ public class UserService {
      * @return boolean
      */
     @Transactional
-    public boolean ifExists(String username) {
+    public boolean exists(String username) {
         return userDao.findByUsername(username) != null;
     }
 

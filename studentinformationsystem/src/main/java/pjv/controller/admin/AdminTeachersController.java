@@ -17,7 +17,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import pjv.config.StageManager;
 import pjv.controller.Validation;
-import pjv.model.Student;
 import pjv.model.Teacher;
 import pjv.model.User;
 import pjv.service.TeacherService;
@@ -157,7 +156,7 @@ public class AdminTeachersController implements Initializable {
                 if (validation.emptyValidation("Password", password.getText().isEmpty())
                         && validation.validate("Username", username.getText(), "[a-zA-Z0-9]+")) {
 
-                    if (!userService.ifExists(username.getText())) {
+                    if (!userService.exists(username.getText())) {
 
                         Teacher teacher = new Teacher();
                         teacher.setFirstName(firstName.getText());
@@ -212,7 +211,8 @@ public class AdminTeachersController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Validation Error");
         alert.setHeaderText(null);
-        alert.setContentText("User with this username already exists. Please use a different username");
+        alert.setContentText("Teacher with this username already exists. Please use a different username");
+        alert.showAndWait();
     }
 
     private void deleteAlert(Teacher teacher) {
@@ -241,6 +241,7 @@ public class AdminTeachersController implements Initializable {
 
 
     private void loadUserDetails() {
+        userTable.getItems().clear();
         teachersList.clear();
         teachersList.addAll(teacherService.findAll());
         userTable.setItems(teachersList);

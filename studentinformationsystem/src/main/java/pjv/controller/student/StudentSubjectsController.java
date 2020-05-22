@@ -99,6 +99,8 @@ public class StudentSubjectsController implements Initializable {
     }
 
     private void loadStudyResults() {
+        table.getItems().clear();
+        subjectsList.clear();
         List<Integer> subjectIDs = enrolledStudentService.findEnrolledSubjectsByStudentId(student.getId());
         Subject subject;
         for (Integer id : subjectIDs) {

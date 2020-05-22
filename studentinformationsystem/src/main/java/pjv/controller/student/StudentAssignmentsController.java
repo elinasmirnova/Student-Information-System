@@ -129,6 +129,7 @@ public class StudentAssignmentsController implements Initializable {
 
     private void loadAssignments() {
         assignmentsList.clear();
+        assignmentsTable.getItems().clear();
         List<Integer> subjectsIds =  enrolledStudentService.findSubjectsIDByStudentId(student.getId());
         List<Subject> subjects = new ArrayList<>();
         for (Integer id: subjectsIds) {

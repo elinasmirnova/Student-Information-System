@@ -72,7 +72,7 @@ public class SubjectService {
      * @return boolean
      */
     @Transactional
-    public boolean ifExists(String code) {
-        return subjectDao.findSubjectByCode(code) == null;
+    public boolean exists(String code) {
+        return subjectDao.findSubjectByCode(code) != null;
     }
 }

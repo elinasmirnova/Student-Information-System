@@ -1,7 +1,6 @@
 package pjv.controller.admin;
 
 import com.jfoenix.controls.*;
-import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -164,7 +163,7 @@ public class AdminStudentsController implements Initializable {
 
                 if (validation.emptyValidation("Password", password.getText().isEmpty())
                     && validation.validate("Username", username.getText(), "[a-zA-Z0-9]+")) {
-                     if (!userService.ifExists(username.getText())) {
+                     if (!userService.exists(username.getText())) {
 
                          Student student = new Student();
                          student.setFirstName(firstName.getText());
@@ -239,11 +238,13 @@ public class AdminStudentsController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Validation Error");
         alert.setHeaderText(null);
-        alert.setContentText("User with this username already exists. Please use a different username");
+        alert.setContentText("Student with this username already exists. Please use a different username.");
+        alert.showAndWait();
     }
 
 
     private void loadUserDetails() {
+        userTable.getItems().clear();
         userList.clear();
         userList.addAll(studentService.findAll());
         userTable.setItems(userList);

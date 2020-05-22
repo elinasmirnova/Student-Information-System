@@ -147,9 +147,9 @@ public class TeachersSubjectsSecondController  implements Initializable {
             if (potential != null) {
                 table2.getSelectionModel().clearSelection();
                 list2.remove(potential);
-                Student fuckingStudent = studentService.find(potential.getStudent().getId());
-                list1.add(studentService.find(fuckingStudent.getId()));
-//                fuckingStudent.removeEnrolledStudent(potential);
+                Student student = studentService.find(potential.getStudent().getId());
+                list1.add(studentService.find(student.getId()));
+//                student.removeEnrolledStudent(potential);
 //                studentService.update(fuckingStudent);
 //                list2.get(0).getSubject().removeEnrolledStudent(potential);
 //                subjectService = Main.context.getBean(SubjectService.class);

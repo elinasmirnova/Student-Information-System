@@ -1,5 +1,7 @@
 package pjv.controller;
 
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -20,13 +22,10 @@ import java.util.ResourceBundle;
 public class LoginController implements Initializable {
 
     @FXML
-    private Label lblLogin;
+    private JFXTextField username;
 
     @FXML
-    private TextField username;
-
-    @FXML
-    private PasswordField password;
+    private JFXPasswordField password;
 
     @FXML
     private Button btnLogin;
@@ -49,28 +48,26 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-      btnLogin.setOnAction(event -> {
-          if (service.authenticate(username.getText(), password.getText())) {
-              authorizationLogin = username.getText();
-              String role = service.checkRole(username.getText());
-              if (role.equals("admin")) {
-                  stageManager.switchScene(FxmlView.ADMIN_MAIN);
-              } else if (role.equals("teacher")) {
-                  stageManager.switchScene(FxmlView.TEACHER_MAIN);
-              } else if (role.equals("student")) {
-                  stageManager.switchScene(FxmlView.STUDENT_MAIN);
-              } else {
-                  validationAlert();
-              }
+        btnLogin.setOnAction(event -> {
+                    if (service.authenticate(username.getText(), password.getText())) {
+                        authorizationLogin = username.getText();
+                        String role = service.checkRole(username.getText());
+                        if (role.equals("admin")) {
+                            stageManager.switchScene(FxmlView.ADMIN_MAIN);
+                        } else if (role.equals("teacher")) {
+                            stageManager.switchScene(FxmlView.TEACHER_MAIN);
+                        } else if (role.equals("student")) {
+                            stageManager.switchScene(FxmlView.STUDENT_MAIN);
 
-          }
+                        }
+                    } else {
+                        validationAlert();
+                        username.requestFocus();
+                        password.requestFocus();
+                    }
+                }
+        );
 
-//          if (userService.authenticate(username.getText(), password.getText())) {
-//              stageManager.switchScene(FxmlView.ADMIN_MAIN);
-//          } else if (studentService.authenticate(username.getText(), password.getText())) {
-//              stageManager.switchScene(FxmlView.STUDENT_MAIN);
-//          }
-      });
     }
 
     private void validationAlert(){

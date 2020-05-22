@@ -189,6 +189,7 @@ public class StudentExamsController implements Initializable {
     }
 
     private void loadSubjects() {
+        comboBox.getItems().clear();
         List<Integer> subjectIDs = enrolledStudentService.findSubjectsIDByStudentId(student.getId());
 //        List<Subject> subjects = new ArrayList<>();
         for (Integer id : subjectIDs) {

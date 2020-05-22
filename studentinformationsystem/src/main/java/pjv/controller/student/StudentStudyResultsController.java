@@ -100,6 +100,8 @@ public class StudentStudyResultsController implements Initializable {
     }
 
     private void loadStudyResults() {
+        table.getItems().clear();
+        subjectsList.clear();
         List<Integer> subjectIDs = enrolledStudentService.findCompletedSubjectsIDByStudentId(student.getId());
         StudyResultPOJO row = new StudyResultPOJO();
         Subject subject;

@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pjv.controller.LoginController">
+<AnchorPane prefHeight="244.0" prefWidth="394.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pjv.controller.LoginController">
     <children>
-        <Rectangle fill="DODGERBLUE" height="253.0" layoutX="-23.0" stroke="#ffffff8b" strokeType="INSIDE" width="417.0" />
-        <Label fx:id="lblLogin" layoutX="97.0" layoutY="16.0" prefHeight="56.0" prefWidth="171.0" textFill="WHITE">
+        <Rectangle fill="#673ab7" height="253.0" layoutX="-23.0" stroke="#ffffff8b" strokeType="INSIDE" strokeWidth="0.0" width="417.0" />
+        <Label layoutX="87.0" layoutY="14.0" prefHeight="56.0" prefWidth="248.0" text="Access into a system" textFill="WHITE">
             <font>
-                <Font size="20.0" />
+                <Font name="Hiragino Sans W1" size="20.0" />
             </font>
         </Label>
-        <TextField fx:id="username" layoutX="87.0" layoutY="72.0" prefHeight="36.0" prefWidth="204.0" promptText="Username" />
-        <PasswordField fx:id="password" layoutX="87.0" layoutY="117.0" prefHeight="36.0" prefWidth="204.0" promptText="Password" />
-        <Button fx:id="btnLogin" layoutX="200.0" layoutY="170.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" styleClass="btnGreen" text="Sign In" textFill="WHITE">
+        <Button fx:id="btnLogin" layoutX="202.0" layoutY="178.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #ede7f6;" styleClass="btnGreen" text="Sign In">
             <font>
                 <Font size="15.0" />
             </font>
             <effect>
                 <DropShadow blurType="ONE_PASS_BOX" />
             </effect></Button>
+      <JFXTextField fx:id="username" focusColor="BLACK" layoutX="87.0" layoutY="80.0" prefHeight="27.0" prefWidth="201.0" promptText="Username" style="-fx-prompt-text-fill: #000000; -fx-text-fill: #fffefe;" unFocusColor="#fffefe" />
+      <JFXPasswordField fx:id="password" focusColor="BLACK" layoutX="87.0" layoutY="127.0" prefHeight="27.0" prefWidth="201.0" promptText="Password" style="-fx-prompt-text-fill: #000000; -fx-text-fill: #fffefe;" unFocusColor="WHITE" />
     </children>
     <opaqueInsets>
         <Insets />

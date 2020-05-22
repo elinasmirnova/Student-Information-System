@@ -32,12 +32,18 @@ public class SubjectDao extends BaseDao<Subject> {
     }
 
     /**
-     * Selects and return subject entity by the subject code
+     * Selects and returns subject entity by the subject code
      * @param code subject code
      * @return Subject entity
      */
     public Subject findSubjectByCode(String code) {
-        return em.createQuery(
-                "SELECT s FROM Subject AS s WHERE s.code = :code", Subject.class).setParameter("code", code).getSingleResult();
+        try {
+            return em.createQuery(
+                    "SELECT s FROM Subject AS s WHERE s.code = :code", Subject.class)
+                    .setParameter("code", code)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 }

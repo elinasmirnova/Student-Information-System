@@ -151,7 +151,7 @@ public class AdminSubjectsController implements Initializable {
                 (rbSummer.isSelected()) || rbWinter.isSelected() ) {
 
             if (subjectId.getText().equals("") || subjectId.getText() == null) {
-                //if (subjectService.ifExists(code.getText())) {
+                if (!subjectService.exists(code.getText())) {
                     Subject subject = new Subject();
                     subject.setCode(code.getText());
                     subject.setName(name.getText());
@@ -167,9 +167,9 @@ public class AdminSubjectsController implements Initializable {
                     updateTable();
                     reset();
                     saveAlert(subject);
-//                } else {
-//                    subjectAlreadyExists();
-//                }
+                } else {
+                    subjectAlreadyExists();
+                }
             } else {
                 Subject subject = subjectService.find(Integer.parseInt(subjectId.getText()));
                 subject.setCode(code.getText());
@@ -198,7 +198,8 @@ public class AdminSubjectsController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Validation Error");
         alert.setHeaderText(null);
-        alert.setContentText("Subject with this code already exists. Please use a different code");
+        alert.setContentText("Subject with this code already exists. Please enter a different code");
+        alert.showAndWait();
     }
 
     private void deleteAlert(Subject subject) {
@@ -235,6 +236,7 @@ public class AdminSubjectsController implements Initializable {
     }
 
     private void getAllTeachersList() {
+        teachersList.clear();
         StringBuilder builder;
         List<Teacher> list = teacherService.findAll();
         for (Teacher teacher : list ) {
@@ -255,6 +257,7 @@ public class AdminSubjectsController implements Initializable {
      */
     private void fillComboBoxTeachers() {
         getAllTeachersList();
+        teachersTest1.getItems().clear();
         //teachersTest2.setItems(teachersList);
         teachersTest1.getItems().addAll(teachersList);
     }
@@ -294,6 +297,7 @@ public class AdminSubjectsController implements Initializable {
      * Fills table with subjects
      */
     private void loadSubjectsDetails() {
+        subjectsTable.getItems().clear();
         subjectsList.clear();
         subjectsList.addAll(subjectService.findAll());
         subjectsTable.setItems(subjectsList);
