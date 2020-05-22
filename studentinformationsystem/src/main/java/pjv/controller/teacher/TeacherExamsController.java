@@ -285,6 +285,7 @@ public class TeacherExamsController implements Initializable {
     }
 
     private void loadSubjectCodesToCheckBox() {
+        subjectCodes.clear();
         List<Subject> subjects = teacher.getSubjects();
         for (Subject subject : subjects) {
             subjectCodes.add(subject.getCode());

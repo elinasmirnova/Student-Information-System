@@ -84,6 +84,7 @@ public class StudentExamsController implements Initializable {
 
     private ObservableList<Exam> examsList = FXCollections.observableArrayList();
     private ObservableList<String> subjectCodesList = FXCollections.observableArrayList();
+    final TableCell<Exam, String> cell = new TableCell<Exam, String>();
 
 
     @FXML
@@ -100,9 +101,16 @@ public class StudentExamsController implements Initializable {
 
     @FXML
     void submit(ActionEvent event) {
+        examsList.clear();
         if (comboBox.getSelectionModel().getSelectedItem() != null) {
             String subjectCode = comboBox.getSelectionModel().getSelectedItem();
             examsList.addAll(examService.findAvailableToEnrollExamsBySubject(subjectCode));
+            List<Exam> studentsExams = student.getExams();
+            System.out.println(student.getExams());
+            System.out.println(examsList);
+            for (Exam e: studentsExams) {
+                examsList.remove(e);
+            }
             examsTable.setItems(examsList);
         }
     }
@@ -150,7 +158,6 @@ public class StudentExamsController implements Initializable {
                             @Override
                             public void updateItem(String item, boolean empty) {
                                 super.updateItem(item, empty);
-                                Exam selectedExam = examsTable.getSelectionModel().getSelectedItem();
                                 if (empty) {
                                     setGraphic(null);
                                     setText(null);
@@ -159,7 +166,7 @@ public class StudentExamsController implements Initializable {
                                         if (btn.getText().equals("Enroll")) {
                                             Exam exam = examsTable.getSelectionModel().getSelectedItem();
                                             exam.setOccupied(exam.getOccupied()+1);
-                                            //student.addExam(exam);
+                                            student.addExam(exam);
                                             exam.addStudent(student);
                                             examService.update(exam);
                                             studentService.update(student);
@@ -167,11 +174,11 @@ public class StudentExamsController implements Initializable {
                                         } else {
                                             Exam exam = examsTable.getSelectionModel().getSelectedItem();
                                             exam.setOccupied(exam.getOccupied()-1);
-                                            //student.removeExam(exam);
+                                            student.removeExam(exam);
                                             exam.removeStudent(student);
                                             examService.update(exam);
                                             studentService.update(student);
-                                            //btn.setText("Enroll");
+                                            btn.setText("Enroll");
                                         }
 
                                     });
@@ -190,6 +197,7 @@ public class StudentExamsController implements Initializable {
 
     private void loadSubjects() {
         comboBox.getItems().clear();
+        subjectCodesList.clear();
         List<Integer> subjectIDs = enrolledStudentService.findSubjectsIDByStudentId(student.getId());
 //        List<Subject> subjects = new ArrayList<>();
         for (Integer id : subjectIDs) {

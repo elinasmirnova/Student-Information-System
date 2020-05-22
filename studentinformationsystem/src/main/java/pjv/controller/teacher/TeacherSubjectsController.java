@@ -33,6 +33,7 @@ import pjv.model.EnrolledStudent;
 import pjv.model.Subject;
 import pjv.model.Teacher;
 import pjv.service.EnrolledStudentService;
+import pjv.service.StudentService;
 import pjv.service.SubjectService;
 import pjv.service.TeacherService;
 import pjv.view.FxmlView;
@@ -110,12 +111,6 @@ public class TeacherSubjectsController implements Initializable {
     @FXML
     private TableColumn<Subject, String> colSemester;
 
-    @FXML
-    private MenuItem viewSubject;
-
-    @FXML
-    private MenuItem deleteUsers1;
-
     @Lazy
     @Autowired
     private StageManager stageManager;
@@ -129,6 +124,9 @@ public class TeacherSubjectsController implements Initializable {
     @Autowired
     private EnrolledStudentService enrolledStudentService;
 
+    @Autowired
+    private StudentService studentService;
+
     Teacher teacher;
 
     Logger LOGGER = Logger.getLogger(TeacherSubjectsController.class.getName());
@@ -136,10 +134,6 @@ public class TeacherSubjectsController implements Initializable {
     private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
     public static ObservableList<EnrolledStudent> studentsList = FXCollections.observableArrayList();
 
-    @FXML
-    void deleteSubject(ActionEvent event) {
-
-    }
 
     @FXML
     void logout(ActionEvent event) {
@@ -171,16 +165,6 @@ public class TeacherSubjectsController implements Initializable {
         newWindow.setScene(new Scene(root1));
         newWindow.initModality(Modality.WINDOW_MODAL);
         newWindow.show();
-    }
-
-    @FXML
-    void viewMoreAboutStudent(ActionEvent event) {
-
-    }
-
-    @FXML
-    void viewMoreAboutSubject(ActionEvent event) {
-
     }
 
     private void loadSubjectsDetails() {
@@ -274,6 +258,13 @@ public class TeacherSubjectsController implements Initializable {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
                     student.setCompleted(newValue);
+                    if (newValue) {
+                        student.getStudent().setObtainedCredits(student.getStudent().getObtainedCredits()+student.getSubject().getCredits());
+                        studentService.update(student.getStudent());
+                    } else {
+                        student.getStudent().setObtainedCredits(student.getStudent().getObtainedCredits()-student.getSubject().getCredits());
+                        studentService.update(student.getStudent());
+                    }
                     enrolledStudentService.update(student);
                 }
             });

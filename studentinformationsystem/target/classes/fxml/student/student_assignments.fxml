@@ -20,7 +20,7 @@
    <children>
       <MenuBar prefHeight="29.0" prefWidth="1000.0">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Navigation">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#toHome" text="Home" />
                   <MenuItem mnemonicParsing="false" onAction="#toExams" text="Exams" />
@@ -41,12 +41,12 @@
           </Menu>
         </menus>
       </MenuBar>
-      <HBox layoutX="-7.0" layoutY="26.0" prefHeight="120.0" prefWidth="1007.0" style="-fx-background-color: #FFEA90;">
+      <HBox layoutX="-7.0" layoutY="26.0" prefHeight="120.0" prefWidth="1007.0" style="-fx-background-color: #ffca28;">
          <padding>
             <Insets top="20.0" />
          </padding>
          <children>
-            <Label prefHeight="24.0" prefWidth="252.0" text="Assignments">
+            <Label prefHeight="24.0" prefWidth="252.0" text="Assignments" textFill="WHITE">
                <HBox.margin>
                   <Insets left="40.0" top="30.0" />
                </HBox.margin>

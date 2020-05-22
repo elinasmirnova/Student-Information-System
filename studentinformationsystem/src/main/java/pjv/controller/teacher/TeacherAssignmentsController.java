@@ -229,6 +229,7 @@ public class TeacherAssignmentsController implements Initializable {
     }
 
     private void loadSubjectCodesToCheckBox() {
+        subjectCodes.clear();
         List<Subject> subjects = teacher.getSubjects();
         for (Subject subject : subjects) {
             subjectCodes.add(subject.getCode());
@@ -246,7 +247,7 @@ public class TeacherAssignmentsController implements Initializable {
 
     private void fillTextFields() {
         reset();
-        label.setText("Edit exam info");
+        label.setText("Edit assignment");
         save.setText("Edit");
         Assignment assignment = assignmentsTable.getSelectionModel().getSelectedItem();
         assignmentId.setText(assignment.getId().toString());

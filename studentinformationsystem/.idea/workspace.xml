@@ -3,29 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="417f07e1-12b2-416a-a644-9a9e959baf1a" name="Default Changelist" comment="GUI (material ui) updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/config/StageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/config/StageManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/admin/AdminStudentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/admin/AdminStudentsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/admin/AdminSubjectsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/admin/AdminSubjectsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/admin/AdminTeachersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/admin/AdminTeachersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentAssignmentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentAssignmentsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentExamsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentExamsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentStudyResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentStudyResultsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentSubjectsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentSubjectsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeachersSubjectsSecondController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeachersSubjectsSecondController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/dao/SubjectDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/dao/SubjectDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/service/SubjectService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/service/SubjectService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/admin/admin_students.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/admin/admin_students.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/admin/admin_subjects.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/admin/admin_subjects.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/admin/admin_teachers.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/admin/admin_teachers.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/student/student_assignments.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/student/student_assignments.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/student/student_exams.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/student/student_exams.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/student/student_personalinfo.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/student/student_personalinfo.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/student/student_studyresults.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/student/student_studyresults.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/student/student_subjects.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/student/student_subjects.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherAssignmentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherAssignmentsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherExamsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherExamsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherSubjectsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherSubjectsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/teacher/teacher_assignments.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/teacher/teacher_assignments.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/teacher/teacher_exams.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/teacher/teacher_exams.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/teacher/teacher_subjects.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/teacher/teacher_subjects.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/fxml/admin/admin_main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/admin/admin_main.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/fxml/admin/admin_students.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/admin/admin_students.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/fxml/admin/admin_subjects.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/admin/admin_subjects.fxml" afterDir="false" />
@@ -364,7 +348,7 @@
       <workItem from="1589874109470" duration="24370000" />
       <workItem from="1589973353476" duration="2585000" />
       <workItem from="1590007260799" duration="10000" />
-      <workItem from="1590007298286" duration="45469000" />
+      <workItem from="1590007298286" duration="49406000" />
     </task>
     <task id="LOCAL-00001" summary="GUI (material ui) updated">
       <created>1590055161919</created>
@@ -387,7 +371,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590095101000</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Skoro done">
+      <created>1590130990064</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1590130990065</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -398,7 +389,8 @@
     <MESSAGE value="GUI (material ui) updated" />
     <MESSAGE value="JavaDoc added and testing environment set" />
     <MESSAGE value="Tests updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tests updated" />
+    <MESSAGE value="Skoro done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Skoro done" />
   </component>
   <component name="WindowStateProjectService">
     <state x="403" y="73" key="#Assign_Data_Sources" timestamp="1590085190331">
@@ -406,10 +398,10 @@
     </state>
     <state x="403" y="73" key="#Assign_Data_Sources/0.0.1440.900@0.0.1440.900" timestamp="1590085190331" />
     <state x="403" y="90" key="#Assign_Data_Sources/0.23.1440.829@0.23.1440.829" timestamp="1589708307080" />
-    <state x="346" y="0" key="#Main" timestamp="1590130729043">
+    <state x="346" y="0" key="#Main" timestamp="1590136075485">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="346" y="0" key="#Main/0.0.1440.900@0.0.1440.900" timestamp="1590130729043" />
+    <state x="346" y="0" key="#Main/0.0.1440.900@0.0.1440.900" timestamp="1590136075485" />
     <state x="346" y="23" key="#Main/0.23.1440.829@0.23.1440.829" timestamp="1590048279939" />
     <state x="332" y="111" key="#Project_Structure" timestamp="1588530661853">
       <screen x="0" y="23" width="1440" height="829" />
@@ -448,31 +440,31 @@
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="455" y="289" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1440.829@0.23.1440.829" timestamp="1588681363150" />
-    <state x="189" y="23" width="1074" height="829" key="CommitChangelistDialog2" timestamp="1590095100379">
+    <state x="189" y="23" width="1074" height="829" key="CommitChangelistDialog2" timestamp="1590130989280">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="189" y="23" width="1074" height="829" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1590095100379" />
+    <state x="189" y="23" width="1074" height="829" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1590130989280" />
     <state x="189" y="23" key="CommitChangelistDialog2/0.23.1440.829@0.23.1440.829" timestamp="1590007639165" />
-    <state width="1398" height="62" key="GridCell.Tab.0.bottom" timestamp="1590130732228">
+    <state width="1398" height="166" key="GridCell.Tab.0.bottom" timestamp="1590136080569">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="62" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1590130732228" />
-    <state width="1398" height="52" key="GridCell.Tab.0.bottom/0.23.1440.829@0.23.1440.829" timestamp="1590129613082" />
-    <state width="1398" height="62" key="GridCell.Tab.0.center" timestamp="1590130732218">
+    <state width="1398" height="166" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1590136080569" />
+    <state width="1398" height="148" key="GridCell.Tab.0.bottom/0.23.1440.829@0.23.1440.829" timestamp="1590135768486" />
+    <state width="1398" height="166" key="GridCell.Tab.0.center" timestamp="1590136080568">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="62" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1590130732218" />
-    <state width="1398" height="52" key="GridCell.Tab.0.center/0.23.1440.829@0.23.1440.829" timestamp="1590129613080" />
-    <state width="1398" height="62" key="GridCell.Tab.0.left" timestamp="1590130732215">
+    <state width="1398" height="166" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1590136080568" />
+    <state width="1398" height="148" key="GridCell.Tab.0.center/0.23.1440.829@0.23.1440.829" timestamp="1590135768485" />
+    <state width="1398" height="166" key="GridCell.Tab.0.left" timestamp="1590136080567">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="62" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1590130732215" />
-    <state width="1398" height="52" key="GridCell.Tab.0.left/0.23.1440.829@0.23.1440.829" timestamp="1590129613080" />
-    <state width="1398" height="62" key="GridCell.Tab.0.right" timestamp="1590130732225">
+    <state width="1398" height="166" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1590136080567" />
+    <state width="1398" height="148" key="GridCell.Tab.0.left/0.23.1440.829@0.23.1440.829" timestamp="1590135768484" />
+    <state width="1398" height="166" key="GridCell.Tab.0.right" timestamp="1590136080568">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="62" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1590130732225" />
-    <state width="1398" height="52" key="GridCell.Tab.0.right/0.23.1440.829@0.23.1440.829" timestamp="1590129613081" />
+    <state width="1398" height="166" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1590136080568" />
+    <state width="1398" height="148" key="GridCell.Tab.0.right/0.23.1440.829@0.23.1440.829" timestamp="1590135768485" />
     <state width="1398" height="39" key="GridCell.Tab.1.bottom" timestamp="1590127608800">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -501,10 +493,10 @@
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="208" y="23" width="1024" height="829" key="SettingsEditor/0.23.1440.829@0.23.1440.829" timestamp="1585768106544" />
-    <state x="320" y="186" key="Vcs.Push.Dialog.v2" timestamp="1590095108811">
+    <state x="320" y="186" key="Vcs.Push.Dialog.v2" timestamp="1590131002025">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="186" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1590095108811" />
+    <state x="320" y="186" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1590131002025" />
     <state x="528" y="224" key="chooseDestDirectoryDialog" timestamp="1588587673716">
       <screen x="0" y="23" width="1440" height="829" />
     </state>

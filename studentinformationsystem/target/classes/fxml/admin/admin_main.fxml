@@ -3,16 +3,36 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="566.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pjv.controller.admin.AdminMainController">
    <children>
-      <Pane layoutY="-3.0" prefHeight="160.0" prefWidth="566.0" style="-fx-background-color: #FFEA90;" />
+      <Pane layoutY="-3.0" prefHeight="160.0" prefWidth="566.0" style="-fx-background-color: #ffca28;">
+         <children>
+            <HBox alignment="TOP_RIGHT" layoutX="1.0" layoutY="24.0" prefHeight="41.0" prefWidth="565.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#logout" prefHeight="22.0" prefWidth="70.0" style="-fx-background-color: #ffca28;" styleClass="background" text="Logout" textFill="#fff9f9" textOverrun="CLIP">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <effect>
+                        <DropShadow blurType="ONE_PASS_BOX" color="#00000091" />
+                     </effect>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children></Pane>
       <GridPane layoutX="100.0" layoutY="241.0" prefHeight="90.0" prefWidth="366.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -23,7 +43,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="subjectsButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="167.0" style="-fx-background-color: #FFEA90;" text="Subjects">
+            <Button fx:id="subjectsButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="167.0" style="-fx-background-color: #ffca28;" text="Subjects">
                <graphic>
                   <FontAwesomeIconView glyphName="LIST" size="25" />
                </graphic>
@@ -34,7 +54,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="studentsButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="133.0" style="-fx-background-color: #FFEA90;" text="Students" GridPane.columnIndex="1">
+            <Button fx:id="studentsButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="133.0" style="-fx-background-color: #ffca28;" text="Students" GridPane.columnIndex="1">
                <graphic>
                   <FontAwesomeIconView glyphName="GROUP" size="25" />
                </graphic>
@@ -45,7 +65,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="teachersButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="127.0" style="-fx-background-color: #FFEA90;" text="Teachers" GridPane.columnIndex="2">
+            <Button fx:id="teachersButton" mnemonicParsing="false" prefHeight="90.0" prefWidth="127.0" style="-fx-background-color: #ffca28;" text="Teachers" GridPane.columnIndex="2">
                <graphic>
                   <FontAwesomeIconView glyphName="BOOK" size="25" />
                </graphic>
