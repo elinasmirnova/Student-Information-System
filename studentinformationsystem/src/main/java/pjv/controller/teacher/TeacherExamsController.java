@@ -326,6 +326,9 @@ public class TeacherExamsController implements Initializable {
         teacher = teacherService.findByUsername(LoginController.authorizationLogin);
         setColumnProperties();
         setColumnAvailableProperties();
+        ToggleGroup group = new ToggleGroup();
+        rbNotAvailable.setToggleGroup(group);
+        rbAvailable.setToggleGroup(group);
         classroom.setItems(classroomList);
         loadSubjectCodesToCheckBox();
         loadExamsDetails();

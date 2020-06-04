@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -134,21 +135,30 @@ public class AdminSubjectsController implements Initializable {
     @FXML
     void deleteSubject(ActionEvent event) {
         Subject subjectToDelete = subjectsTable.getSelectionModel().getSelectedItem();
-        subjectService.remove(subjectToDelete);
-        LOGGER.info("Subject was removed successfully");
-        reset();
-        updateTable();
-        deleteAlert(subjectToDelete);
+        if (subjectToDelete != null) {
+            subjectService.remove(subjectToDelete);
+            LOGGER.info("Subject was removed successfully");
+            reset();
+            updateTable();
+            deleteAlert(subjectToDelete);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("You clicked on the empty row. Please select a row and then try it again");
+            alert.showAndWait();
+        }
+
     }
 
     @FXML
     void save(ActionEvent event) {
         if (validation.validate("Code", code.getText(), "[a-zA-Z0-9]+") &&
-                validation.validate("Name", name.getText(), "[a-zA-Z]+") &&
+                validation.emptyValidation("Name", name.getText() == null) &&
               //  validation.validate("Synopsis", txtAreaSynopsis.getText(), "([A-Za-z0-9]+\\.[A-Za-z0-9]+(\\r)?(\\n)?)") &&
                 validation.emptyValidation("Credits", credits.getSelectionModel().getSelectedItem() == null) &&
                 validation.emptyValidation("Role", role.getSelectionModel().getSelectedItem() == null) &&
-                (rbSummer.isSelected()) || rbWinter.isSelected() ) {
+                (rbSummer.isSelected() || rbWinter.isSelected() ) ) {
 
             if (subjectId.getText().equals("") || subjectId.getText() == null) {
                 if (!subjectService.exists(code.getText())) {
@@ -369,6 +379,9 @@ public class AdminSubjectsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         role.setItems(rolesList);
         credits.setItems(creditsList);
+        ToggleGroup group = new ToggleGroup();
+        rbWinter.setToggleGroup(group);
+        rbSummer.setToggleGroup(group);
         setColumnProperties();
         loadSubjectsDetails();
         fillComboBoxTeachers();

@@ -135,11 +135,20 @@ public class AdminStudentsController implements Initializable {
     @FXML
     void deleteUser(ActionEvent event) {
         Student studentToRemove = userTable.getSelectionModel().getSelectedItem();
-        studentService.remove(studentToRemove);
-        userService.remove(studentToRemove.getUser());
-        reset();
-        updateTable();
-        deleteAlert(studentToRemove);
+        if (studentToRemove != null) {
+            studentService.remove(studentToRemove);
+            userService.remove(studentToRemove.getUser());
+            reset();
+            updateTable();
+            deleteAlert(studentToRemove);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("You clicked on the empty row. Please select a row with the student you want to delete and then try it again");
+            alert.showAndWait();
+        }
+
 
     }
 
@@ -178,6 +187,7 @@ public class AdminStudentsController implements Initializable {
                          student.setDateOfBirth(dob.getValue());
                          student.setStudyProgram(studyProgram.getValue());
                          student.setYear(year.getValue());
+                         student.setObtainedCredits(0);
                          studentService.persist(student);
                          reset();
                          LOGGER.fine("Student entity was persisted");
@@ -208,7 +218,6 @@ public class AdminStudentsController implements Initializable {
 
         }
     }
-
 
     private void deleteAlert(Student student) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

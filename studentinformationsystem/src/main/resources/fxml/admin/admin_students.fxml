@@ -100,7 +100,7 @@
                   <Insets left="15.0" right="15.0" />
                </VBox.margin>
             </JFXComboBox>
-            <JFXPasswordField fx:id="password" focusColor="#4527a0" prefHeight="27.0" prefWidth="251.0" unFocusColor="BLACK">
+            <JFXPasswordField fx:id="password" focusColor="#4527a0" prefHeight="27.0" prefWidth="251.0" promptText="Password" unFocusColor="BLACK">
                <VBox.margin>
                   <Insets left="15.0" right="15.0" />
                </VBox.margin>

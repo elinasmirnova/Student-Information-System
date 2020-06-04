@@ -135,12 +135,20 @@ public class AdminTeachersController implements Initializable {
     @FXML
     void deleteUser(ActionEvent event) {
         Teacher teacherToRemove = userTable.getSelectionModel().getSelectedItem();
-        teacherService.remove(teacherToRemove);
-        userService.remove(teacherToRemove.getUser());
-        LOGGER.info("Teacher was removed successfully");
-        reset();
-        updateTable();
-        deleteAlert(teacherToRemove);
+        if (teacherToRemove != null) {
+            teacherService.remove(teacherToRemove);
+            userService.remove(teacherToRemove.getUser());
+            LOGGER.info("Teacher was removed successfully");
+            reset();
+            updateTable();
+            deleteAlert(teacherToRemove);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("You clicked on the empty row. Please select a row with the teacher you want to delete and then try it again");
+            alert.showAndWait();
+        }
     }
 
     @FXML

@@ -985,18 +985,18 @@
       <ObjectId>738432</ObjectId>
       <Owner>ear2019zs_13</Owner>
       <IntrospectionStateNumber>414934</IntrospectionStateNumber>
-      <Relations>sequence|table|818383|818385|1
+      <Relations>sequence|table|932939|932941|1
 sequence|table|927470|927472|1
-sequence|table|931245|931247|1
-sequence|table|928095|928097|1
+sequence|table|928615|928617|1
+sequence|table|927576|927578|1
+sequence|table|931806|931808|1
 sequence|table|818349|818351|1
 sequence|table|818365|818367|1
 sequence|table|818330|818332|1
 sequence|table|818341|818343|1
-sequence|table|928615|928617|1
-sequence|table|927576|927578|1
-sequence|table|931806|931808|1
-sequence|table|932939|932941|1
+sequence|table|818383|818385|1
+sequence|table|931245|931247|1
+sequence|table|928095|928097|1
 </Relations>
     </database>
     <database id="247" parent="1" name="ear2019zs_130">
@@ -1397,16 +1397,16 @@ sequence|table|932939|932941|1
       <Owner>postgres</Owner>
       <IntrospectionStateNumber>411186</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|76967|76969|1
+      <Relations>sequence|table|128642|128644|1
+sequence|table|128650|128652|1
+sequence|table|76967|76969|1
 sequence|table|76954|76956|1
-sequence|table|97150|97152|1
-sequence|table|97139|97141|1
+sequence|table|97158|97160|1
 sequence|table|97190|97192|1
 sequence|table|97169|97171|1
 sequence|table|97177|97179|1
-sequence|table|97158|97160|1
-sequence|table|128642|128644|1
-sequence|table|128650|128652|1
+sequence|table|97150|97152|1
+sequence|table|97139|97141|1
 </Relations>
     </database>
     <role id="346" parent="1" name="ear">
