@@ -160,7 +160,7 @@ public class AdminSubjectsController implements Initializable {
                 validation.emptyValidation("Role", role.getSelectionModel().getSelectedItem() == null) &&
                 (rbSummer.isSelected() || rbWinter.isSelected() ) ) {
 
-            if (subjectId.getText().equals("") || subjectId.getText() == null) {
+            if (subjectId.getText() == null) {
                 if (!subjectService.exists(code.getText())) {
                     Subject subject = new Subject();
                     subject.setCode(code.getText());

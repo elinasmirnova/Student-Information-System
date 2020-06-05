@@ -158,7 +158,7 @@ public class TeacherExamsController implements Initializable {
     }
 
     @FXML
-    void save(ActionEvent event) throws ParseException {
+    void save(ActionEvent event){
 
             if (validation.validate("capacity", capacity.getText(), "[0-9]+") &&
                 validation.emptyValidation("subject code", subjectCode.getSelectionModel().getSelectedItem() == null) &&
@@ -166,8 +166,8 @@ public class TeacherExamsController implements Initializable {
                 validation.emptyValidation("time", timePicker.getEditor().getText().isEmpty()) &&
                 (rbAvailable.isSelected() || rbNotAvailable.isSelected()) &&
         validation.emptyValidation("classroom", classroom.getSelectionModel().getSelectedItem() == null)) {
-
-            if (examId.getText().equals("") || examId.getText() == null) {
+                System.out.println(examId.getText());
+            if (examId.getText() == null) {
                 Exam exam = new Exam();
                 exam.setCapacity(Integer.parseInt(capacity.getText()));
                 exam.setClassroom(classroom.getValue());
@@ -179,8 +179,8 @@ public class TeacherExamsController implements Initializable {
                 exam.setOccupied(0);
                 examService.persist(exam);
                 LOGGER.info("Exam was persisted successfully");
-                reset();
                 updateTable();
+                reset();
                 saveAlert(exam);
 
 
@@ -194,8 +194,8 @@ public class TeacherExamsController implements Initializable {
                 exam.setTime(timePicker.getValue().toString());
                 examService.update(exam);
                 LOGGER.info("Exam was updated");
-                reset();
                 updateTable();
+                reset();
                 updateAlert(exam);
 
             }

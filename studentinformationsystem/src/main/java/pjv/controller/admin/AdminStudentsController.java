@@ -166,7 +166,7 @@ public class AdminStudentsController implements Initializable {
                 validation.emptyValidation("Year", year.getSelectionModel().getSelectedItem() == null) &&
                 validation.emptyValidation("Study program", studyProgram.getSelectionModel().getSelectedItem() == null)) {
 
-            if (userId.getText() == null || userId.getText().equals("")) {
+            if (userId.getText() == null) {
 //                if(validate("Email", getEmail(), "[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+") &&
 //                        emptyValidation("Password", getPassword().isEmpty())){
 

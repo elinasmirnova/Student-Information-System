@@ -131,7 +131,7 @@ public class TeacherAssignmentsController implements Initializable {
                 validation.emptyValidation("Deadline", deadline.getEditor().getText().isEmpty()) &&
                 validation.emptyValidation("Subject code", subjectCode.getSelectionModel().getSelectedItem() == null)) {
 
-            if (assignmentId.getText().equals("") || assignmentId.getText() == null) {
+            if (assignmentId.getText() == null) {
                 Assignment assignment = new Assignment();
 
                 assignment.setName(title.getText());

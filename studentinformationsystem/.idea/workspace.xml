@@ -2,31 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="417f07e1-12b2-416a-a644-9a9e959baf1a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/b3c3962c-4d92-4407-9b5b-268fe0bf5768.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/b3c3962c-4d92-4407-9b5b-268fe0bf5768.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentExamsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentExamsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentPersonalInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/student/StudentPersonalInfoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/admin/AdminStudentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/admin/AdminStudentsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/admin/AdminSubjectsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/admin/AdminSubjectsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/admin/AdminTeachersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/admin/AdminTeachersController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherAssignmentsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherAssignmentsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherExamsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherExamsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherSubjectsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherSubjectsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeachersSubjectsSecondController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeachersSubjectsSecondController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/dao/EnrolledStudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/dao/EnrolledStudentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/dao/ExamDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/dao/ExamDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/dao/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/dao/StudentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/model/Exam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/model/Exam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/service/EnrolledStudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/service/EnrolledStudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pjv/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pjv/service/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxml/student/student_exams.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fxml/student/student_exams.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/fxml/student/student_exams.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/fxml/student/student_exams.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentExamsController$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentExamsController$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentExamsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentExamsController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentExamsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentExamsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentPersonalInfoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/controller/student/StudentPersonalInfoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pjv/controller/admin/AdminTeachersController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/controller/admin/AdminTeachersController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pjv/controller/teacher/TeacherAssignmentsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/controller/teacher/TeacherAssignmentsController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/pjv/controller/teacher/TeacherExamsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/controller/teacher/TeacherExamsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pjv/dao/StudentDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/dao/StudentDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pjv/model/Exam.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/model/Exam.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pjv/service/StudentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/service/StudentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pjv/controller/teacher/TeacherSubjectsController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/controller/teacher/TeacherSubjectsController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pjv/controller/teacher/TeacherSubjectsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/controller/teacher/TeacherSubjectsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pjv/controller/teacher/TeachersSubjectsSecondController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/controller/teacher/TeachersSubjectsSecondController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pjv/dao/EnrolledStudentDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/dao/EnrolledStudentDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/pjv/service/EnrolledStudentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pjv/service/EnrolledStudentService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +144,7 @@
       <recent name="pjv.config" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Main">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pjv.Main" />
       <module name="studentinformationsystem2" />
@@ -169,7 +158,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in studentinformationsystem (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in studentinformationsystem (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="studentinformationsystem" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -177,7 +166,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in studentinformationsystem (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in studentinformationsystem (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="studentinformationsystem" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="All in studentinformationsystem (4)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="studentinformationsystem" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -208,22 +205,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DaoTest.testRepositoriesInApplicationContext" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="studentinformationsystem" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="pjv.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="pjv.dao" />
-      <option name="MAIN_CLASS_NAME" value="pjv.dao.DaoTest" />
-      <option name="METHOD_NAME" value="testRepositoriesInApplicationContext" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Main" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="SPRING_BOOT_MAIN_CLASS" value="pjv.Main" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -240,11 +221,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in studentinformationsystem (4)" />
+        <item itemvalue="JUnit.All in studentinformationsystem (3)" />
         <item itemvalue="JUnit.All in studentinformationsystem (2)" />
         <item itemvalue="JUnit.All in studentinformationsystem" />
         <item itemvalue="JUnit.DaoTest" />
-        <item itemvalue="JUnit.All in studentinformationsystem (1)" />
-        <item itemvalue="JUnit.DaoTest.testRepositoriesInApplicationContext" />
       </list>
     </recent_temporary>
   </component>
@@ -289,7 +270,7 @@
       <workItem from="1591205936754" duration="4194000" />
       <workItem from="1591268231317" duration="3181000" />
       <workItem from="1591272508813" duration="16625000" />
-      <workItem from="1591352853721" duration="6690000" />
+      <workItem from="1591352853721" duration="12331000" />
     </task>
     <task id="LOCAL-00001" summary="GUI (material ui) updated">
       <created>1590055161919</created>
@@ -347,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591268401613</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Enroll students to subject updated and some changes">
+      <created>1591363257698</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1591363257699</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -363,7 +351,8 @@
     <MESSAGE value="Error with test passing fixed" />
     <MESSAGE value="Final commit" />
     <MESSAGE value="Admin updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Admin updated" />
+    <MESSAGE value="Enroll students to subject updated and some changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Enroll students to subject updated and some changes" />
   </component>
   <component name="WindowStateProjectService">
     <state x="301" y="53" key="#All_in_studentinformationsystem_(2)" timestamp="1590159038142">
@@ -375,11 +364,11 @@
     </state>
     <state x="403" y="73" key="#Assign_Data_Sources/0.0.1440.900@0.0.1440.900" timestamp="1590085190331" />
     <state x="403" y="90" key="#Assign_Data_Sources/0.23.1440.829@0.23.1440.829" timestamp="1589708307080" />
-    <state x="346" y="23" key="#Main" timestamp="1591362842483">
+    <state x="346" y="23" key="#Main" timestamp="1591370111055">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="346" y="23" key="#Main/0.0.1440.900@0.0.1440.900" timestamp="1590146421767" />
-    <state x="346" y="23" key="#Main/0.23.1440.829@0.23.1440.829" timestamp="1591362842483" />
+    <state x="346" y="23" key="#Main/0.23.1440.829@0.23.1440.829" timestamp="1591370111055" />
     <state x="332" y="111" key="#Project_Structure" timestamp="1588530661853">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
@@ -417,51 +406,51 @@
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="455" y="289" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1440.829@0.23.1440.829" timestamp="1588681363150" />
-    <state x="189" y="23" width="1074" height="829" key="CommitChangelistDialog2" timestamp="1591268400458">
+    <state x="189" y="23" width="1074" height="829" key="CommitChangelistDialog2" timestamp="1591363256328">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="189" y="23" width="1074" height="829" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1590136564015" />
-    <state x="189" y="23" key="CommitChangelistDialog2/0.23.1440.829@0.23.1440.829" timestamp="1591268400458" />
-    <state width="1398" height="506" key="GridCell.Tab.0.bottom" timestamp="1591363185687">
+    <state x="189" y="23" key="CommitChangelistDialog2/0.23.1440.829@0.23.1440.829" timestamp="1591363256328" />
+    <state width="1398" height="231" key="GridCell.Tab.0.bottom" timestamp="1591370118653">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state width="1398" height="166" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1590136680632" />
-    <state width="1398" height="506" key="GridCell.Tab.0.bottom/0.23.1440.829@0.23.1440.829" timestamp="1591363185687" />
-    <state width="1398" height="506" key="GridCell.Tab.0.center" timestamp="1591363185686">
+    <state width="1398" height="231" key="GridCell.Tab.0.bottom/0.23.1440.829@0.23.1440.829" timestamp="1591370118653" />
+    <state width="1398" height="231" key="GridCell.Tab.0.center" timestamp="1591370118652">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state width="1398" height="166" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1590136680632" />
-    <state width="1398" height="506" key="GridCell.Tab.0.center/0.23.1440.829@0.23.1440.829" timestamp="1591363185686" />
-    <state width="1398" height="506" key="GridCell.Tab.0.left" timestamp="1591363185685">
+    <state width="1398" height="231" key="GridCell.Tab.0.center/0.23.1440.829@0.23.1440.829" timestamp="1591370118652" />
+    <state width="1398" height="231" key="GridCell.Tab.0.left" timestamp="1591370118652">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state width="1398" height="166" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1590136680631" />
-    <state width="1398" height="506" key="GridCell.Tab.0.left/0.23.1440.829@0.23.1440.829" timestamp="1591363185685" />
-    <state width="1398" height="506" key="GridCell.Tab.0.right" timestamp="1591363185686">
+    <state width="1398" height="231" key="GridCell.Tab.0.left/0.23.1440.829@0.23.1440.829" timestamp="1591370118652" />
+    <state width="1398" height="231" key="GridCell.Tab.0.right" timestamp="1591370118653">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state width="1398" height="166" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1590136680632" />
-    <state width="1398" height="506" key="GridCell.Tab.0.right/0.23.1440.829@0.23.1440.829" timestamp="1591363185686" />
-    <state width="1398" height="506" key="GridCell.Tab.1.bottom" timestamp="1591363185688">
+    <state width="1398" height="231" key="GridCell.Tab.0.right/0.23.1440.829@0.23.1440.829" timestamp="1591370118653" />
+    <state width="1398" height="96" key="GridCell.Tab.1.bottom" timestamp="1591369801935">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state width="1398" height="39" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1590136680624" />
-    <state width="1398" height="506" key="GridCell.Tab.1.bottom/0.23.1440.829@0.23.1440.829" timestamp="1591363185688" />
-    <state width="1398" height="506" key="GridCell.Tab.1.center" timestamp="1591363185687">
+    <state width="1398" height="96" key="GridCell.Tab.1.bottom/0.23.1440.829@0.23.1440.829" timestamp="1591369801935" />
+    <state width="1398" height="96" key="GridCell.Tab.1.center" timestamp="1591369801932">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state width="1398" height="39" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1590136680623" />
-    <state width="1398" height="506" key="GridCell.Tab.1.center/0.23.1440.829@0.23.1440.829" timestamp="1591363185687" />
-    <state width="1398" height="506" key="GridCell.Tab.1.left" timestamp="1591363185687">
+    <state width="1398" height="96" key="GridCell.Tab.1.center/0.23.1440.829@0.23.1440.829" timestamp="1591369801932" />
+    <state width="1398" height="96" key="GridCell.Tab.1.left" timestamp="1591369801929">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state width="1398" height="39" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1590136680622" />
-    <state width="1398" height="506" key="GridCell.Tab.1.left/0.23.1440.829@0.23.1440.829" timestamp="1591363185687" />
-    <state width="1398" height="506" key="GridCell.Tab.1.right" timestamp="1591363185687">
+    <state width="1398" height="96" key="GridCell.Tab.1.left/0.23.1440.829@0.23.1440.829" timestamp="1591369801929" />
+    <state width="1398" height="96" key="GridCell.Tab.1.right" timestamp="1591369801933">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state width="1398" height="39" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1590136680623" />
-    <state width="1398" height="506" key="GridCell.Tab.1.right/0.23.1440.829@0.23.1440.829" timestamp="1591363185687" />
+    <state width="1398" height="96" key="GridCell.Tab.1.right/0.23.1440.829@0.23.1440.829" timestamp="1591369801933" />
     <state width="238" height="539" key="HiddenNamespacesPopup" timestamp="1588883735548">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
@@ -470,11 +459,11 @@
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="208" y="23" width="1024" height="829" key="SettingsEditor/0.23.1440.829@0.23.1440.829" timestamp="1585768106544" />
-    <state x="320" y="194" key="Vcs.Push.Dialog.v2" timestamp="1591268404638">
+    <state x="320" y="194" key="Vcs.Push.Dialog.v2" timestamp="1591363263875">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
     <state x="320" y="186" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1590136575128" />
-    <state x="320" y="194" key="Vcs.Push.Dialog.v2/0.23.1440.829@0.23.1440.829" timestamp="1591268404638" />
+    <state x="320" y="194" key="Vcs.Push.Dialog.v2/0.23.1440.829@0.23.1440.829" timestamp="1591363263875" />
     <state x="528" y="224" key="chooseDestDirectoryDialog" timestamp="1588587673716">
       <screen x="0" y="23" width="1440" height="829" />
     </state>
@@ -539,9 +528,9 @@
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherExamsController.java</url>
-          <line>169</line>
-          <option name="timeStamp" value="43" />
+          <url>file://$PROJECT_DIR$/src/main/java/pjv/controller/teacher/TeacherAssignmentsController.java</url>
+          <line>133</line>
+          <option name="timeStamp" value="46" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -159,7 +159,7 @@ public class AdminTeachersController implements Initializable {
                 validation.emptyValidation("Degree", degree.getSelectionModel().getSelectedItem() == null) &&
                 validation.emptyValidation("Department", department.getSelectionModel().getSelectedItem() == null)) {
 
-            if (userId.getText() == null || userId.getText() == "") {
+            if (userId.getText() == null) {
 
                 if (validation.emptyValidation("Password", password.getText().isEmpty())
                         && validation.validate("Username", username.getText(), "[a-zA-Z0-9]+")) {
