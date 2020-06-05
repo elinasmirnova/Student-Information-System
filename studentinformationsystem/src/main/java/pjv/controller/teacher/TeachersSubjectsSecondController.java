@@ -73,6 +73,7 @@ public class TeachersSubjectsSecondController  implements Initializable {
     @Autowired
     private StudentService studentService;
 
+    Subject subject = TeacherSubjectsController.getSubject();
     private ObservableList<Student> list1 = FXCollections.observableArrayList();
     private List<Student> allStudents = new ArrayList<>();
     private ObservableList<EnrolledStudent> list2 = FXCollections.observableArrayList(TeacherSubjectsController.studentsList);
@@ -134,7 +135,8 @@ public class TeachersSubjectsSecondController  implements Initializable {
                 list1.remove(potential);
                 EnrolledStudent newStudent = new EnrolledStudent();
                 newStudent.setStudent(potential);
-                newStudent.setSubject(list2.get(0).getSubject());
+                newStudent.setSubject(subject);
+                subject.addEnrolledStudent(newStudent);
                 enrolledStudentService = Main.context.getBean(EnrolledStudentService.class);
                 enrolledStudentService.persist(newStudent);
                 list2.add(newStudent);
@@ -162,6 +164,10 @@ public class TeachersSubjectsSecondController  implements Initializable {
 //                subjectService.update(list2.get(0).getSubject());
                 enrolledStudentService = Main.context.getBean(EnrolledStudentService.class);
                 enrolledStudentService.remove(potential);
+                student.removeEnrolledStudent(potential);
+                subject.removeEnrolledStudent(potential);
+                studentService.update(student);
+                enrolledStudentService.deleteEnrolledStudent(student.getId(), subject.getId());
                 table1.setItems(list1);
                 list2.remove(potential);
                 TeacherSubjectsController.studentsList.remove(potential);

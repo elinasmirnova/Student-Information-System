@@ -39,28 +39,49 @@ import java.util.logging.Logger;
 public class StudentExamsController implements Initializable {
 
     @FXML
-    private TableView<Exam> examsTable;
+    private TableView<Exam> examsToEnrollTable;
 
     @FXML
-    private TableColumn<Exam, LocalDate> dateColumn;
+    private TableColumn<Exam, LocalDate> dateColumn1;
 
     @FXML
-    private TableColumn<Exam, String> timeColumn;
+    private TableColumn<Exam, String> timeColumn1;
 
     @FXML
-    private TableColumn<Exam, String> classroomColumn;
+    private TableColumn<Exam, String> classroomColumn1;
 
     @FXML
-    private TableColumn<Exam, Integer> capacityColumn;
+    private TableColumn<Exam, Integer> capacityColumn1;
 
     @FXML
-    private TableColumn<Exam, Integer> occupiedColumn;
+    private TableColumn<Exam, Integer> occupiedColumn1;
 
     @FXML
-    private TableColumn<Exam, String> enrollColumn;
+    private TableColumn<Exam, String> enrollColumn1;
 
     @FXML
     private JFXComboBox<String> comboBox;
+
+    @FXML
+    private TableView<Exam> enrolledExamsTable;
+
+    @FXML
+    private TableColumn<Exam, LocalDate> dateColumn2;
+
+    @FXML
+    private TableColumn<Exam, String> timeColumn2;
+
+    @FXML
+    private TableColumn<Exam, String> classroomColumn2;
+
+    @FXML
+    private TableColumn<Exam, Integer> capacityColumn2;
+
+    @FXML
+    private TableColumn<Exam, Integer> occupiedColumn2;
+
+    @FXML
+    private TableColumn<Exam, String> withdrawColumn;
 
     @Lazy
     @Autowired
@@ -82,13 +103,15 @@ public class StudentExamsController implements Initializable {
 
     Logger LOGGER = Logger.getLogger(StudentExamsController.class.getName());
 
-    private ObservableList<Exam> examsList = FXCollections.observableArrayList();
+    private ObservableList<Exam> examsToEnroll = FXCollections.observableArrayList();
+    private ObservableList<Exam> enrolledExamsList = FXCollections.observableArrayList();
     private ObservableList<String> subjectCodesList = FXCollections.observableArrayList();
 
 
     @FXML
     void clear(ActionEvent event) {
-        examsList.clear();
+        examsToEnroll.clear();
+        enrolledExamsList.clear();
         comboBox.getSelectionModel().clearSelection();
     }
 
@@ -100,18 +123,33 @@ public class StudentExamsController implements Initializable {
 
     @FXML
     void submit(ActionEvent event) {
-        examsList.clear();
+        //List<Exam> foundExams = new ArrayList<>();
         if (comboBox.getSelectionModel().getSelectedItem() != null) {
             String subjectCode = comboBox.getSelectionModel().getSelectedItem();
-            examsList.addAll(examService.findAvailableToEnrollExamsBySubject(subjectCode));
-            List<Exam> studentsExams = student.getExams();
+            updateTables(subjectCode);
+//            examsToEnroll.addAll(examService.findAvailableToEnrollExamsBySubject(subjectCode));
+//
+//            List<Exam> enrolledExams = student.getExams();
+//
+//            examsToEnroll.removeAll(enrolledExams);
+
+//            for (Exam e: enrolledExams) {
+//                examsToEnroll.remove(e);
+//            }
+           // List<Exam> studentsExams = student.getExams();
 //            System.out.println(student.getExams());
 //            System.out.println(examsList);
-            for (Exam e: studentsExams) {
-                examsList.remove(e);
+//            for (Exam e: studentsExams) {
+//                examsList.remove(e);
+//            }
+
+//            for (Exam e: studentsExams) {
+//                if (e.getSubject().getCode().equals(subjectCode)) {
+//                    examsList.add(e);
+//                }
             }
-            examsTable.setItems(examsList);
-        }
+//            examsToEnrollTable.setItems(examsToEnroll);
+
     }
 
 
@@ -140,14 +178,14 @@ public class StudentExamsController implements Initializable {
         stageManager.switchScene(FxmlView.STUDENT_SUBJECTS);
     }
 
-    private void setColumnProperties(){
-        dateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getDate()));
-        timeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTime()));
-        classroomColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getClassroom()));
-        capacityColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCapacity()));
-        occupiedColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getOccupied()));
+    private void setColumnPropertiesForTable1(){
+        dateColumn1.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getDate()));
+        timeColumn1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTime()));
+        classroomColumn1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getClassroom()));
+        capacityColumn1.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCapacity()));
+        occupiedColumn1.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getOccupied()));
         Callback<TableColumn<Exam, String>, TableCell<Exam, String>> cellFactory
-                = //
+                =
                 new Callback<TableColumn<Exam, String>, TableCell<Exam, String>>() {
                     @Override
                     public TableCell call(final TableColumn<Exam, String> param) {
@@ -163,28 +201,17 @@ public class StudentExamsController implements Initializable {
                                     setText(null);
                                 } else {
                                     btn.setOnAction(event -> {
-                                        if (btn.getText().equals("Enroll")) {
-                                            Exam exam = examsTable.getSelectionModel().getSelectedItem();
+
+                                            //Exam exam = examsToEnrollTable.getSelectionModel().getSelectedItem();
+                                            Exam exam = (Exam) getTableRow().getItem();
                                             exam.setOccupied(exam.getOccupied()+1);
                                             student.addExam(exam);
                                             exam.addStudent(student);
-                                            examService.update(exam);
                                             studentService.update(student);
-                                            String subjectCode = comboBox.getSelectionModel().getSelectedItem();
-                                            examsList.clear();
-                                            examsList.addAll(examService.findAvailableToEnrollExamsBySubject(subjectCode));
-                                            examsTable.setItems(examsList);
+                                            examService.update(exam);
 
-                                            btn.setText("Withdraw");
-                                        } else {
-                                            Exam exam = examsTable.getSelectionModel().getSelectedItem();
-                                            exam.setOccupied(exam.getOccupied()-1);
-                                            student.removeExam(exam);
-                                            exam.removeStudent(student);
-                                            examService.update(exam);
-                                            studentService.update(student);
-                                            btn.setText("Enroll");
-                                        }
+                                            String subjectCode = comboBox.getSelectionModel().getSelectedItem();
+                                            updateTables(subjectCode);
 
                                     });
                                     setGraphic(btn);
@@ -195,7 +222,100 @@ public class StudentExamsController implements Initializable {
                         return cell;
                     }
                 };
-        enrollColumn.setCellFactory(cellFactory);
+        enrollColumn1.setCellFactory(cellFactory);
+        //colAvailable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().isAvailable()));
+
+    }
+
+    private void updateTables(String subjectCode) {
+        examsToEnroll.clear();
+        enrolledExamsList.clear();
+
+        List<Exam> allExams = new ArrayList<>(examService.findAvailableToEnrollExamsBySubject(subjectCode));
+
+        List<Exam> enrolledExams = student.getExams();
+
+        for (Exam e : enrolledExams) {
+            if (e.getSubject().getCode().equals(subjectCode)) {
+                enrolledExamsList.add(e);
+            }
+        }
+
+//        System.out.println( (enrolledExams.size() != 0 ) ? enrolledExams.get(0).getId() : null);
+//        System.out.println( (examsToEnroll.size() != 0 ) ? examsToEnroll.get(0).getId() : null);
+//        System.out.println(enrolledExams);
+//        System.out.println(examsToEnroll);
+        if (enrolledExams.size() != 0) {
+            for (Exam e1 : allExams) {
+                for (Exam e2: enrolledExams) {
+                    if (!e1.getId().equals(e2.getId())) {
+                        examsToEnroll.add(e1);
+                    }
+                }
+            }
+        } else {
+            examsToEnroll.addAll(allExams);
+        }
+//        System.out.println(enrolledExams);
+//        System.out.println(examsToEnroll);
+//        System.out.println((enrolledExams.size() != 0  ) ?enrolledExams.get(0).getId() : null );
+//        System.out.println((examsToEnroll.size() != 0 ) ? examsToEnroll.get(0).getId() : null);
+
+
+        enrolledExamsTable.setItems(enrolledExamsList);
+        examsToEnrollTable.setItems(examsToEnroll);
+    }
+
+    private void setColumnPropertiesForTable2(){
+        dateColumn2.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getDate()));
+        timeColumn2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTime()));
+        classroomColumn2.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getClassroom()));
+        capacityColumn2.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCapacity()));
+        occupiedColumn2.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getOccupied()));
+        Callback<TableColumn<Exam, String>, TableCell<Exam, String>> cellFactory
+                =
+                new Callback<TableColumn<Exam, String>, TableCell<Exam, String>>() {
+                    @Override
+                    public TableCell call(final TableColumn<Exam, String> param) {
+                        final TableCell<Exam, String> cell = new TableCell<Exam, String>() {
+
+                            final Button btn = new Button("Withdraw");
+
+                            @Override
+                            public void updateItem(String item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (empty) {
+                                    setGraphic(null);
+                                    setText(null);
+                                } else {
+                                    btn.setOnAction(event -> {
+                                            //Exam exam = enrolledExamsTable.getSelectionModel().getSelectedItem();
+                                            Exam exam = (Exam) getTableRow().getItem();
+
+                                            exam.setOccupied(exam.getOccupied()-1);
+                                            student.removeExam(exam);
+                                            exam.removeStudent(student);
+                                            examService.update(exam);
+                                            studentService.update(student);
+
+                                            String subjectCode = comboBox.getSelectionModel().getSelectedItem();
+
+                                            studentService.deleteStudentFromExam(student.getId(), exam.getId());
+
+
+                                            updateTables(subjectCode);
+
+
+                                    });
+                                    setGraphic(btn);
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                };
+        withdrawColumn.setCellFactory(cellFactory);
         //colAvailable.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().isAvailable()));
 
     }
@@ -222,7 +342,8 @@ public class StudentExamsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         student = studentService.findByUsername(LoginController.authorizationLogin);
         loadSubjects();
-        setColumnProperties();
+        setColumnPropertiesForTable1();
+        setColumnPropertiesForTable2();
         LOGGER.info("Canvas was initialized");
     }
 }

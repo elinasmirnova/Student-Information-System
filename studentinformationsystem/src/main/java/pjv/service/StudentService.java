@@ -61,4 +61,6 @@ public class StudentService {
         return studentDao.findByUsername(username);
     }
 
+    @Transactional
+    public void deleteStudentFromExam(Integer studentId, Integer examId) { studentDao.deleteStudentFromExam(studentId, examId);}
 }

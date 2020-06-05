@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import pjv.config.StageManager;
 import pjv.controller.LoginController;
+import pjv.controller.Validation;
 import pjv.model.Student;
 import pjv.service.StudentService;
 import pjv.view.FxmlView;
@@ -69,6 +70,8 @@ public class StudentPersonalInfoController implements Initializable {
 
     Student student;
 
+    private static Validation validation = new Validation();
+
     Logger LOGGER = Logger.getLogger(StudentPersonalInfoController.class.getName());
 
     @FXML
@@ -115,22 +118,26 @@ public class StudentPersonalInfoController implements Initializable {
     }
 
     private void loadPhoneAddress() {
-        address.setDisable(true);
-        phoneNumber.setDisable(true);
-        address.setText(student.getAddress());
-        phoneNumber.setText(student.getPhoneNumber());
+            address.setDisable(true);
+            phoneNumber.setDisable(true);
+            address.setText(student.getAddress());
+            phoneNumber.setText(student.getPhoneNumber());
     }
 
     private void editPhoneAddress() {
-        address.setDisable(false);
-        phoneNumber.setDisable(false);
+            address.setDisable(false);
+            phoneNumber.setDisable(false);
     }
 
     private void updatePhoneAddress() {
-        student.setAddress(address.getText());
-        student.setPhoneNumber(phoneNumber.getText());
-        studentService.update(student);
-        loadPhoneAddress();
+        if (validation.validate("phone number", phoneNumber.getText(), "[0-9*#+() -]*")) {
+            student.setAddress(address.getText());
+            student.setPhoneNumber(phoneNumber.getText());
+            studentService.update(student);
+            LOGGER.info("Changes have been saved");
+            editButton.setText("Edit");
+            loadPhoneAddress();
+        }
     }
 
     /**
@@ -146,12 +153,9 @@ public class StudentPersonalInfoController implements Initializable {
         editButton.setOnAction(event -> {
            if (editButton.getText().equals("Edit")) {
                 editPhoneAddress();
-               LOGGER.info("Changes have been saved");
                 editButton.setText("Save");
             } else {
                updatePhoneAddress();
-               LOGGER.info("Changes have been saved");
-               editButton.setText("Edit");
             }
 
         });

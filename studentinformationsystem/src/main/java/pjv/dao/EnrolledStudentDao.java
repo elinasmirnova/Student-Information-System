@@ -84,4 +84,9 @@ public class EnrolledStudentDao extends BaseDao<EnrolledStudent> {
         return q.getResultList();
     }
 
+    public void deleteEnrolledStudent(Integer studentId, Integer subjectId) {
+        em.createNativeQuery("DELETE FROM enrolledstudents WHERE student_id = ?1 AND subject_id = ?2")
+                .setParameter(1, studentId ).setParameter(2, subjectId).executeUpdate();;
+    }
+
 }

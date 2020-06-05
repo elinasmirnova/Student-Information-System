@@ -129,6 +129,8 @@ public class TeacherSubjectsController implements Initializable {
 
     Teacher teacher;
 
+    private static Subject subject;
+
     Logger LOGGER = Logger.getLogger(TeacherSubjectsController.class.getName());
 
     private ObservableList<Subject> subjectsList = FXCollections.observableArrayList();
@@ -202,6 +204,7 @@ public class TeacherSubjectsController implements Initializable {
     }
 
     private void loadStudentsListForSubject(Subject subject) {
+        TeacherSubjectsController.subject = subject;
         enrolledStudentService = Main.context.getBean(EnrolledStudentService.class);
         subjectId.setText(subject.getId().toString());
         code.setText(subject.getCode());
@@ -295,4 +298,9 @@ public class TeacherSubjectsController implements Initializable {
         LOGGER.info("Canvas was initialized");
 
     }
+
+    public static Subject getSubject() {
+        return subject;
+    }
+
 }

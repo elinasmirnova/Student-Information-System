@@ -54,7 +54,6 @@ public class Exam implements Serializable {
             this.students = new ArrayList<>();
         }
         students.add(s);
-        s.addExam(this);
     }
 
     public void removeStudent(Student s) {

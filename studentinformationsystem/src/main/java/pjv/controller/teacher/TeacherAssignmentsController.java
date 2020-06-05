@@ -107,17 +107,26 @@ public class TeacherAssignmentsController implements Initializable {
     @FXML
     void delete(ActionEvent event) {
         Assignment assignment = assignmentsTable.getSelectionModel().getSelectedItem();
-        assignmentService.remove(assignment);
-        LOGGER.info("Assignment was removed");
-        reset();
-        updateTable();
-        deleteAlert(assignment);
+        if (assignment != null) {
+            assignmentService.remove(assignment);
+            LOGGER.info("Assignment was removed");
+            reset();
+            updateTable();
+            deleteAlert(assignment);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("You clicked on the empty row. Please select a row with the assignment you want to delete and then try it again");
+            alert.showAndWait();
+        }
+
 
     }
 
     @FXML
     void save(ActionEvent event) {
-        if (validation.validate("Title", title.getText(), "[a-zA-Z]+") &&
+        if (validation.emptyValidation("Title", title.getText().isEmpty()) &&
                 validation.emptyValidation("Description", txtAreaDescription.getText().isEmpty()) &&
                 validation.emptyValidation("Deadline", deadline.getEditor().getText().isEmpty()) &&
                 validation.emptyValidation("Subject code", subjectCode.getSelectionModel().getSelectedItem() == null)) {

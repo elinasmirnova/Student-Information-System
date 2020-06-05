@@ -35,4 +35,5 @@ public class ExamDao extends BaseDao<Exam>  {
         return em.createQuery("SELECT e FROM Exam AS e WHERE e.subject.code = :code AND e.available = true")
                 .setParameter("code", code).getResultList();
     }
+
 }

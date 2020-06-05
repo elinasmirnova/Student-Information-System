@@ -109,5 +109,8 @@ public class EnrolledStudentService {
         return dao.findEnrolledSubjectsByStudentId(id);
     }
 
-
+    @Transactional
+    public void deleteEnrolledStudent(Integer studentId, Integer subjectId) {
+        dao.deleteEnrolledStudent(studentId, subjectId);
+    }
 }

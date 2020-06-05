@@ -141,17 +141,26 @@ public class TeacherExamsController implements Initializable {
     @FXML
     void deleteExam(ActionEvent event) {
         Exam examToRemove = examsTable.getSelectionModel().getSelectedItem();
-        examService.remove(examToRemove);
-        LOGGER.info("Exam was removed successfully");
-        reset();
-        updateTable();
-        deleteAlert(examToRemove);
+        if (examToRemove != null) {
+            examService.remove(examToRemove);
+            LOGGER.info("Exam was removed successfully");
+            reset();
+            updateTable();
+            deleteAlert(examToRemove);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("You clicked on the empty row. Please select a row with the exam you want to delete and then try it again");
+            alert.showAndWait();
+        }
+
     }
 
     @FXML
     void save(ActionEvent event) throws ParseException {
 
-            if (validation.validate("capacity", capacity.getText(), "[1-100]") &&
+            if (validation.validate("capacity", capacity.getText(), "[0-9]+") &&
                 validation.emptyValidation("subject code", subjectCode.getSelectionModel().getSelectedItem() == null) &&
                 validation.emptyValidation("date", date.getEditor().getText().isEmpty()) &&
                 validation.emptyValidation("time", timePicker.getEditor().getText().isEmpty()) &&
@@ -167,6 +176,7 @@ public class TeacherExamsController implements Initializable {
                 exam.setTime(timePicker.getValue().toString());
                 exam.setSubject(subjectService.findSubjectByCode(subjectCode.getValue()));
                 exam.setTeacher(teacher);
+                exam.setOccupied(0);
                 examService.persist(exam);
                 LOGGER.info("Exam was persisted successfully");
                 reset();
@@ -180,6 +190,7 @@ public class TeacherExamsController implements Initializable {
                 exam.setClassroom(classroom.getValue());
                 exam.setAvailable(rbAvailable.isSelected());
                 exam.setDate(date.getValue());
+                exam.setSubject(subjectService.findSubjectByCode(subjectCode.getValue()));
                 exam.setTime(timePicker.getValue().toString());
                 examService.update(exam);
                 LOGGER.info("Exam was updated");

@@ -30,6 +30,11 @@ public class StudentDao extends BaseDao<Student>  {
         }
     }
 
+    public void deleteStudentFromExam(Integer studentId, Integer examId) {
+        em.createNativeQuery("DELETE FROM student_exam WHERE student_id = ?1 AND exam_id = ?2")
+                .setParameter(1, studentId ).setParameter(2, examId).executeUpdate();;
+    }
+
 
 //    public List<Student> customFindAll() {
 //        List<Student> students = em.createNamedQuery(
